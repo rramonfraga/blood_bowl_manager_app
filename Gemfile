@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'pry'
-gem 'rspec'
+gem 'rspec-rails'
 gem 'json'
 # Use Devise
 gem 'devise'
