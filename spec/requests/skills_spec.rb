@@ -28,6 +28,13 @@ RSpec.describe "Skill", type: :request do
       expect(response).to have_http_status(200)
       expect(data["name"]).to eq("Block")
     end
+
+    it "return and error when there aren't skill" do
+      get "/api/skills/5000000"
+      data = JSON.parse(response.body)
+
+      expect(response).to have_http_status(404)
+    end
   end
 
 end
