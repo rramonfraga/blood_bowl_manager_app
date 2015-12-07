@@ -1,6 +1,6 @@
 class Skill < ActiveRecord::Base
   has_many :abilities
-  has_many :players, throught: :abilities
+  has_many :players, through: :abilities
 
   validates :name,
             :category,

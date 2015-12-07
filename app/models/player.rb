@@ -2,7 +2,7 @@ class Player < ActiveRecord::Base
   belongs_to :team
  
   has_many :abilities
-  has_many :skills, throught: :abilities
+  has_many :skills, through: :abilities
 
   validates :quantity,
             :title,
