@@ -85,7 +85,7 @@
   },
   {
     "id": 13,
-    "name": "Claw / Claws",
+    "name": "Claws",
     "category": "Mutation",
     "resource_uri": "",
     "description": "A player with this skill is blessed with a huge crab like claw or razor sharp talons that make armour useless. When an opponent is Knocked Down by this player during a block, any Armour roll of 8 or more after modifications automatically breaks armour."
@@ -463,55 +463,62 @@
   },
   {
     "id": 67,
+    "name": "Take Root",
+    "category": "Extraordinary",
+    "resource_uri": "",
+    "description": "Immediately after declaring an Action with this player, roll a D6. On a 2 or more, the player may take his Action as normal. On a 1, the player “takes root”, and his MA is considered 0 until a drive ends, or he is Knocked Down or Placed Prone (and no, players from his own team may not try and block him in order to try to knock him down!). A player that has taken root may not Go For It, be pushed back for any reason, or use any skill that would allow him to move out of his current square or be Placed Prone. The player may block adjacent players without following-up as part of a Block Action however if a player fails his Take Root roll as part of a Blitz Action he may not block that turn (he can still roll to stand up if he is Prone)."
+  },
+  {
+    "id": 68,
     "name": "Tentacles",
     "category": "Mutation",
     "resource_uri": "",
     "description": "The player may attempt to use this skill when an opposing player attempts to dodge or leap out of any of his tackle zones. The opposing player rolls 2D6 adding their own player’s ST and subtracting the Tentacles player's ST from the score. If the final result is 5 or less, then the moving player is held firm, and his action ends immediately. If a player attempts to leave the tackle zone of several players that have the Tentacles ability, then only one of the opposing players may attempt to grab him with the tentacles."
   },
   {
-    "id": 68,
+    "id": 69,
     "name": "Thick Skull",
     "category": "Strength",
     "resource_uri": "",
     "description": "This player treats a roll of 8 on the Injury table, after any modifiers have been applied, as a Stunned result rather than a KO’d result. This skill may be used even if the player is Prone or Stunned."
   },
   {
-    "id": 69,
+    "id": 70,
     "name": "Throw Team-Mate",
     "category": "Extraordinary",
     "resource_uri": "",
     "description": "A player with this skill has the ability to throw a player from the same team instead of the ball! (This includes the ball if the player thrown already has it!) The player throwing must end the movement of his Pass Action standing next to the intended team-mate to be thrown, who must have the Right Stuff skill and be standing. The pass is worked out exactly the same as the player with Throw Team-Mate passing a ball, except the player must subtract 1 from the D6 roll when he passes the player, fumbles are not automatically turnovers, and Long Pass or Long Bomb range passes are not possible. In addition, accurate passes are treated instead as inaccurate passes thus scattering the player three times as players are heavier and harder to pass than a ball. The thrown player cannot be intercepted. A fumbled team-mate will land in the square he originally occupied. If the thrown player scatters off the pitch, he is beaten up by the crowd in the same manner as a player who has been pushed off the pitch. If the final square he scatters into is occupied by another player, treat the player landed on as Knocked Down and roll for Armour (even if already Prone or Stunned), and then the player being thrown will scatter one more square. If the thrown player would land on another player, continue to scatter the thrown player until he ends up in an empty square or off the pitch (i.e. he cannot land on more than one player). See the Right Stuff entry to see if the player lands on his feet or head-down in a crumpled heap!"
   },
   {
-    "id": 70,
+    "id": 71,
     "name": "Titchy",
     "category": "Extraordinary",
     "resource_uri": "",
     "description": "Titchy players tend to be even smaller and more nimble than other Stunty players. To represent this, the player may add 1 to any Dodge roll he attempts. On the other hand, while opponents do have to dodge to leave any of a Titchy player’s tackle zones, Titchy players are so small that they do not exert a -1 modifier when opponents dodge into any of their tackle zones."
   },
   {
-    "id": 71,
+    "id": 72,
     "name": "Two Heads",
     "category": "Mutation",
     "resource_uri": "",
     "description": "Having two heads enables this player to watch where he is going and the opponent trying to make sure he does not get there at the same time. Add 1 to all Dodge rolls the player makes."
   },
   {
-    "id": 72,
+    "id": 73,
     "name": "Very Long Legs",
     "category": "Mutation",
     "resource_uri": "",
     "description": "The player is allowed to add 1 to the D6 roll whenever he attempts to intercept or uses the Leap skill. In addition, the Safe Throw skill may not be used to affect any Interception rolls made by this player."
   },
   {
-    "id": 73,
+    "id": 74,
     "name": "Wild Animal",
     "category": "Extraordinary",
     "resource_uri": "",
     "description": "Wild Animals are uncontrollable creatures that rarely do exactly what a coach wants of them. In fact, just about all you can really rely on them to do is lash out at opposing players that move too close to them! To represent this, immediately after declaring an Action with a Wild Animal, roll a D6, adding 2 to the roll if taking a Block or Blitz Action. On a roll of 1-3, the Wild Animal does not move and roars in rage instead, and the Action is wasted."
   },
   {
-    "id": 74,
+    "id": 75,
     "name": "Wrestle",
     "category": "General",
     "resource_uri": "",

@@ -6,7 +6,7 @@ class CreateTeams < ActiveRecord::Migration
       t.integer :reroll_value
       t.boolean :apothecary
       t.boolean :stakes
-      t.string :raise
+      t.string :revive
 
       t.timestamps null: false
     end

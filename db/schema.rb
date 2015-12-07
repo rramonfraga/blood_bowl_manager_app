@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20151207103115) do
     t.integer  "reroll_value"
     t.boolean  "apothecary"
     t.boolean  "stakes"
-    t.string   "raise"
+    t.string   "revive"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
