@@ -6,7 +6,11 @@ class SocietiesController < ApplicationController
   end
 
   def show
-    @society = Society.find_by(id: params[:id]) || render_404(params)
+    if @society = Society.find_by(id: params[:id])
+      @championships = @society.championships
+    else
+      render_404(params)
+    end
   end
 
   def new

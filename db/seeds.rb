@@ -47,9 +47,48 @@ def create_players
   end
 end
 
+
+def create_users
+  3.times do | index |
+    User.create name: "User #{index + 1}", 
+                email: "email#{index + 1}@email.com",
+                password: "patata00",
+                password_confirmation: "patata00"
+  end
+end
+
+def create_societies
+  3.times do | index |
+    soc1 = Society.create name: "Society #{index + 1}"
+    soc2 = Society.create name: "Society #{index + 4}"
+    user = User.find_by(name: "User #{index +1}")
+    realsociety = Society.find_by(name: "Society 1")
+    unless 1 != index 
+      user.societies << realsociety
+    end
+    user.societies << soc1
+    user.societies << soc2
+  end
+end
+
+def create_championships
+  3.times do |index|
+    soc = Society.find_by(name: "Society #{index + 1}")
+    soc.championships.create name: "Championship #{index + 1}", kind: "League"
+    soc.championships.create name: "Championship #{index + 2}", kind: "League"
+  end
+end
+
 create_skills
 create_teams
 create_players
+
+create_users
+create_societies
+create_championships
+
+
+
 
 
 
