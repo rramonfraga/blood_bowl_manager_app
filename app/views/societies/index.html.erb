@@ -1,0 +1,17 @@
+<h1>Blood Bowl Societies</h1>
+
+<a href="<%= new_society_path %>" class="btn btn-primary">
+  Add a new Society
+</a>
+
+<ul class="list-unstyled">
+  <% @societies.each do |society| %>
+    <li data-bbq="<%= society.id %>">
+      <h2>
+        <a href="<%= society_path(society.id) %>">
+          <%= society.name %>
+        </a>
+      </h2>
+    </li>
+  <% end %>
+</ul>

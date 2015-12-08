@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
-  resources :societies
+  root 'societies#index'
+
+  resources :societies, only: [:index, :show, :new, :create]
   devise_for :users
-  
+
   get '/api/skills' => 'skills#index'
   get '/api/skills/:id' => 'skills#show'
 

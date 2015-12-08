@@ -6,9 +6,30 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body data-hook="controller-<%= controller_name %> action-<%= action_name %>">
+    <header>
+    <div class="container nav">
+      <nav class="pull-right">
+        <% if current_user %> 
+          <ul class="nav nav-pills"> 
+            <li role="presentation"><%= link_to current_user.name.capitalize, '#' %></li>
+            <li role="presentation"><%= link_to current_user.email, '#'%></li>
 
-<%= yield %>
+            <li role="presentation" class="active" ><%= link_to "Log out", destroy_user_session_path %></li>
+          </ul> 
+        <% else %> 
+          <ul class="nav nav-pills"> 
+            <li role="presentation" class="active" ><%= link_to "Log In", new_user_session_path %></a></li> 
+            <li role="presentation"><%= link_to "Register", new_user_registration_path %></a></li> 
+          </ul> 
+        <% end %>
+      </nav>
+    </div>
+  </header>
+
+<section class="container">
+  <%= yield %>
+</section>
 
 </body>
 </html>
