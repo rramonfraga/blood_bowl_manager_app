@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   
   root 'societies#index'
 
-  resources :societies, only: [:index, :show, :new, :create]
+  resources :societies, only: [:index, :show, :new, :create] do
+    resources :championships, only: [:show, :new, :create]
+  end
+
   devise_for :users
 
   get '/api/skills' => 'skills#index'
