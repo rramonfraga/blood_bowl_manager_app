@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :user_players
+  resources :user_teams
+  resources :matches
   root 'societies#index'
 
   resources :societies, only: [:index, :show, :new, :create] do
