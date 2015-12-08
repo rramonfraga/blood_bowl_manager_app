@@ -6,7 +6,6 @@ class Player < ActiveRecord::Base
 
   validates :quantity,
             :title,
-            :team,
             :cost,
             :ma,
             :st,
@@ -14,6 +13,5 @@ class Player < ActiveRecord::Base
             :av, 
             :normal,
             :double,
-            :feeder,
             presence: true
 end
