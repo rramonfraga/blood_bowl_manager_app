@@ -1,10 +1,31 @@
 class SocietiesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    if current_user
-      @societies = current_user.societies.order(:created_at)
+    @societies = current_user.societies.order(:created_at)
+  end
+
+  def show
+    @society = Society.find_by(id: params[:id]) || render_404(params)
+  end
+
+  def new
+    @society = Society.new
+  end
+
+  def create
+    @society = Society.new society_params
+    unless @society.save
+      render(:new)
     else
-      redirect_to '/users/sign_in' 
+      current_user.societies << @society
+      redirect_to(societies_path)
     end
+  end
+
+  private
+  def society_params
+    params.require(:society).permit(:name)
   end
 
 end

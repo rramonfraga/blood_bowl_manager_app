@@ -1,0 +1,20 @@
+<h1>Add a new Society</h1>
+
+<% if @society.errors.any? %>
+  <ul class="list-unstyled">
+    <% @society.errors.full_messages.each do |msg| %>
+      <li class="alert alert-danger" role="alert"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @society do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <button type="submit" class="btn btn-success">
+    Add Society
+  </button>
+<% end %>
