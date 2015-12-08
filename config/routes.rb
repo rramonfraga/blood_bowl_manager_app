@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :societies
+  devise_for :users
+  
   get '/api/skills' => 'skills#index'
   get '/api/skills/:id' => 'skills#show'
 
