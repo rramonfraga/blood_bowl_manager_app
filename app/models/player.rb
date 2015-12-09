@@ -14,4 +14,6 @@ class Player < ActiveRecord::Base
             :normal,
             :double,
             presence: true
+
+  serialize :list_skills, Array
 end

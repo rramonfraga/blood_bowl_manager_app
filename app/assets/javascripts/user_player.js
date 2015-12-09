@@ -11,9 +11,8 @@
 
     request.done(function (player) {
       var htmlSkill = ""
-      if player.skills
-      player.skills.forEach( function (skill) {
-        htmlSkill = htmlSkill + skill.name
+      player.list_skills.forEach( function (skill) {
+        htmlSkill = htmlSkill + skill + ", "
       });
       var htmlParts = [
         '<div class=" col-sm-2 ">',
@@ -24,8 +23,8 @@
         '    <div class="field col-sm-3 av">' + player.av +'</div>',
         '  </div>',
         '</div>',
-        '<div class="field col-sm-2 cost">' + player.cost + '</div>',
-        '<div class="field col-sm-2 skill">' + htmlSkill +'</div>'
+        '<div class="field col-sm-1 cost">' + player.cost + '</div>',
+        '<div class="field col-sm-3 skill">' + htmlSkill +'</div>'
         ];
 
       $select.parent().next().html(htmlParts.join('\n'));

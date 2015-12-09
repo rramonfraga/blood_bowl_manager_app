@@ -37,12 +37,15 @@ def create_players
                                         av: player["av"],
                                         normal: player["normal"],
                                         double: player["double"],
-                                        feeder: player["feeder"]
+                                        feeder: player["feeder"],
+                                        list_skills: []
       
       player["skills"].each do |skill|
+        new_player.list_skills << skill["name"]
         skill_to_assign = Skill.find_by(name: skill["name"])
         new_player.skills << skill_to_assign
       end
+      new_player.save
     end
   end
 end
