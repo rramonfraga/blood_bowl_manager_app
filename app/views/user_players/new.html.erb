@@ -1,0 +1,53 @@
+<h1> Choose your players </h1>
+
+<div class="cointainer">
+  <h2><%= @user_team.user_name %></h2>
+</div>
+
+<div class="row">
+  <div class="field col-sm-1 number">Nº</div>
+  <div class="field col-sm-1">Dorsal</div>
+  <div class="field col-sm-2 name">Name</div>
+  <div class="field col-sm-2 player">Title</div>
+  <div class=" col-sm-2 "><div class="row">
+    <div class="field col-sm-3 ma">MA</div>
+    <div class="field col-sm-3 st">ST</div>
+    <div class="field col-sm-3 ag">AD</div>
+    <div class="field col-sm-3 av">AV</div>
+  </div></div>
+  <div class="field col-sm-2 cost">Cost</div>
+  <div class="field col-sm-2 skill">Skills</div>
+</div>
+
+<div class = "js-player-form-container">
+<%= form_tag new_user_team_user_player_path do %>
+  <% @players.each_with_index do |player, index| %>
+
+   <%= fields_for 'players[]', player do |p| %>
+
+      <div class="row">
+        <div class="field col-sm-1 number">
+          <%= index + 1 %>
+        </div>
+        <div class="field col-sm-1 dorsal">
+          <%= p.text_field :dorsal_number %>
+        </div>
+        <div class="field col-sm-2 name">
+          <%= p.text_field :user_name %>
+        </div>
+
+        <div class="field col-sm-2 player">
+          <%= p.collection_select(:template_player_id, Team.find_by(id: @user_team.template_team_id).players, :id, :title, {:include_blank => ""}, {:class => "js-player"} ) %>
+        </div>
+        
+        <div class='js-stats-cointainer'></div>
+        
+      </div>
+
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
+</div>

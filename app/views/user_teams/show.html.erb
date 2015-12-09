@@ -1,0 +1,13 @@
+<h1>Your Teams</h1>
+
+<ul class="list-unstyled">
+  <% @user_teams.each do |user_team| %>
+    <li data-user-team="<%= user_team.id %>">
+      <h2>
+        <a href="<%= user_team_path(id:user_team.id) %>">
+          <%= user_team.user_name  %>
+        </a>
+      </h2>
+    </li>
+  <% end %>
+</ul>

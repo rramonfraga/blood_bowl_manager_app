@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208114630) do
+ActiveRecord::Schema.define(version: 20151208145531) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "player_id"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20151208114630) do
   end
 
   add_index "championships", ["society_id"], name: "index_championships_on_society_id"
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "championship_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "matches", ["championship_id"], name: "index_matches_on_championship_id"
 
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
@@ -85,6 +93,46 @@ ActiveRecord::Schema.define(version: 20151208114630) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "user_players", force: :cascade do |t|
+    t.integer  "user_team_id"
+    t.string   "user_name"
+    t.integer  "template_player_id"
+    t.integer  "dorsal_number"
+    t.integer  "player_value"
+    t.integer  "injury"
+    t.integer  "complentions"
+    t.integer  "touchdowns"
+    t.integer  "interceptions"
+    t.integer  "casualties"
+    t.integer  "mvp"
+    t.integer  "ma"
+    t.integer  "st"
+    t.integer  "ag"
+    t.integer  "av"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "user_players", ["user_team_id"], name: "index_user_players_on_user_team_id"
+
+  create_table "user_teams", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "user_name"
+    t.integer  "template_team_id"
+    t.integer  "treasury"
+    t.integer  "team_value"
+    t.integer  "re_rolls"
+    t.integer  "fan_factor"
+    t.integer  "assistant_coaches"
+    t.integer  "cheerleaders"
+    t.integer  "apothecaries"
+    t.integer  "halfling_chef"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -3,6 +3,7 @@ class CreateUserTeams < ActiveRecord::Migration
     create_table :user_teams do |t|
       t.references :user, index: true
       t.string :user_name
+      t.integer :template_team_id
       t.integer :treasury
       t.integer :team_value
       t.integer :re_rolls

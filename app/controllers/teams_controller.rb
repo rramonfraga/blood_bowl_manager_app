@@ -14,4 +14,14 @@ class TeamsController < ApplicationController
     end
   end
 
+  def show_players
+    team = Team.find_by id: params[:id]
+    if team
+      players = team.players
+      render status: 200, json: players
+    else
+      render status: 404, json: { errors: "players from the team not found" }
+    end
+  end
+
 end

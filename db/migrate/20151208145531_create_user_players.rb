@@ -3,6 +3,8 @@ class CreateUserPlayers < ActiveRecord::Migration
     create_table :user_players do |t|
       t.references :user_team, index: true
       t.string :user_name
+      t.integer :template_player_id
+      t.integer :dorsal_number
       t.integer :player_value
       t.integer :injury
       t.integer :complentions
