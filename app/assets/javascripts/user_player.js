@@ -27,6 +27,7 @@
         '<div class="field col-sm-3 skill">' + htmlSkill +'</div>'
         ];
 
+      $('.js-treasury').html()
       $select.parent().next().html(htmlParts.join('\n'));
     });
   });

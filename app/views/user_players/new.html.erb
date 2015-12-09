@@ -1,26 +1,17 @@
 <h1> Choose your players </h1>
 
 <div class="cointainer">
-  <h2><%= @user_team.user_name %></h2>
+  <div class="row">
+    <h2 class="col-sm-6"><%= @user_team.user_name %></h2>
+    <h2 class="col-sm-3"> Treasury: </h2>
+    <h2 class="col-sm-3 js-treasury"><%= @user_team.treasury %></h2>
+  </div>
 </div>
 
-<div class="row">
-  <div class="field col-sm-1 number">Nº</div>
-  <div class="field col-sm-1">Dorsal</div>
-  <div class="field col-sm-2 name">Name</div>
-  <div class="field col-sm-2 player">Title</div>
-  <div class=" col-sm-2 "><div class="row">
-    <div class="field col-sm-3 ma">MA</div>
-    <div class="field col-sm-3 st">ST</div>
-    <div class="field col-sm-3 ag">AD</div>
-    <div class="field col-sm-3 av">AV</div>
-  </div></div>
-  <div class="field col-sm-1 cost">Cost</div>
-  <div class="field col-sm-3 skill">Skills</div>
-</div>
+<%= render '/layouts/grid_stats' %>
 
 <div class = "js-player-form-container">
-<%= form_tag new_user_team_user_player_path do %>
+<%= form_tag user_team_user_players_path(params[:user_team_id]) do %>
   <% @players.each_with_index do |player, index| %>
 
    <%= fields_for 'players[]', player do |p| %>
@@ -47,7 +38,7 @@
     <% end %>
   <% end %>
   <div class="actions">
-    <%= submit_tag %>
+    <%= submit_tag("Create Team") %>
   </div>
 <% end %>
 </div>

@@ -1,6 +1,11 @@
 class UserTeamsController < ApplicationController
-  def show
+  def index
     @user_teams = current_user.user_teams.all
+  end
+
+  def show
+    @user_team = current_user.user_teams.find_by(id: params[:id])
+    @user_players = @user_team.user_players
   end
 
   def new

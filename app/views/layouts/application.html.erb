@@ -10,8 +10,15 @@
     <header>
     <div class="container nav">
       <nav class="pull-right">
-        <% if current_user %> 
-          <ul class="nav nav-pills"> 
+        <% if current_user %>
+
+          <ul class="nav nav-pills">
+            <li role="presentation"><a href="<%= user_teams_path %>" class="btn btn-primary">
+              Show Team
+            </a></li>
+            <li role="presentation"><a href="<%= new_user_team_path %>" class="btn btn-primary">
+              Create a new Team
+            </a></li>
             <li role="presentation"><%= link_to current_user.name.capitalize, '#' %></li>
             <li role="presentation"><%= link_to current_user.email, '#'%></li>
 

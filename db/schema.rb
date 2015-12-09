@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209144151) do
+ActiveRecord::Schema.define(version: 20151209170939) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "player_id"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 20151209144151) do
     t.integer  "av"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "list_skills"
+    t.string   "title"
   end
 
   add_index "user_players", ["user_team_id"], name: "index_user_players_on_user_team_id"

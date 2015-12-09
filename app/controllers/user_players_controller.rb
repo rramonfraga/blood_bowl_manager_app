@@ -10,14 +10,16 @@ class UserPlayersController < ApplicationController
 
   def create
     if params.has_key?("player")
-      UserTeam.create(player_params(params["player"]))
+      UserTeam.find_by(id: params[:user_team_id]).user_players.create(player_params(params["player"]))
     else
       params["players"].each do |player|
-        if player["player"] != "" || player["player"] != ""
-          UserTeam.create(player_params(player))
+        if player["dorsal_number"] != "" || player["user_name"] != ""
+          new_player = UserTeam.find_by(id: params[:user_team_id]).user_players.create(player_params(player))
+          UserPlayer.assign_stats_from_the_template(new_player)
         end
       end
     end
+    redirect_to '/'
   end
 
   def destoy
@@ -25,6 +27,6 @@ class UserPlayersController < ApplicationController
 
   private
   def player_params(my_params)
-    my_params.permit(:user_name, :dorsal_number)
+    my_params.permit(:user_name, :dorsal_number, :template_player_id)
   end
 end

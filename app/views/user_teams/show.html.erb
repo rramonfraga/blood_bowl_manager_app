@@ -1,13 +1,28 @@
-<h1>Your Teams</h1>
+<h1><%= @user_team.user_name %></h1>
 
-<ul class="list-unstyled">
-  <% @user_teams.each do |user_team| %>
-    <li data-user-team="<%= user_team.id %>">
-      <h2>
-        <a href="<%= user_team_path(id:user_team.id) %>">
-          <%= user_team.user_name  %>
-        </a>
-      </h2>
-    </li>
+
+<%= render '/layouts/grid_stats' %>
+
+
+  <% @user_players.each do |user_player| %>
+    <div class="row">
+      <div class="field col-sm-1 experience">Nº</div>
+      <div class="field col-sm-1"><%= user_player.dorsal_number  %></div>
+      <div class="field col-sm-2 name"><%= user_player.user_name  %></div>
+      <div class="field col-sm-2 title"><%= user_player.title  %></div>
+
+
+      <div class=" col-sm-2 "><div class="row">
+        <div class="field col-sm-3 ma"><%= user_player.ma  %></div>
+        <div class="field col-sm-3 st"><%= user_player.st  %></div>
+        <div class="field col-sm-3 ag"><%= user_player.ag %></div>
+        <div class="field col-sm-3 av"><%= user_player.av  %></div>
+      </div></div>
+      <div class="field col-sm-1 cost"><%= user_player.player_value  %></div>
+      <div class="field col-sm-3 skill">
+        <% user_player.list_skills.each do |skill| %>
+          <%= skill + ", "%>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</ul>
