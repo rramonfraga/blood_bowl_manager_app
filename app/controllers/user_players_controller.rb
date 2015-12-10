@@ -22,6 +22,10 @@ class UserPlayersController < ApplicationController
     redirect_to '/'
   end
 
+  def update
+    
+  end
+
   def destoy
   end
 

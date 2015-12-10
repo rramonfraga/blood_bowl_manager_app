@@ -4,9 +4,9 @@ class CreateMatches < ActiveRecord::Migration
       t.references :season, index: true
       t.integer :host_team_id
       t.integer :visit_team_id
-      t.boolean :finished
-      t.integer :host_result
-      t.integer :visit_result
+      t.boolean :finished, default: false
+      t.integer :host_result, default: 0
+      t.integer :visit_result, default: 0
 
       t.timestamps null: false
     end

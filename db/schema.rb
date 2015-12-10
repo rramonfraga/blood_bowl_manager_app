@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210094946) do
+ActiveRecord::Schema.define(version: 20151210173534) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "player_id"
@@ -26,23 +26,35 @@ ActiveRecord::Schema.define(version: 20151210094946) do
   create_table "championships", force: :cascade do |t|
     t.string   "name"
     t.integer  "society_id"
-    t.string   "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "start"
+    t.string   "kind",       default: "League"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "start",      default: false
   end
 
   add_index "championships", ["society_id"], name: "index_championships_on_society_id"
+
+  create_table "feats", force: :cascade do |t|
+    t.integer  "match_id"
+    t.integer  "user_player_id"
+    t.string   "kind"
+    t.boolean  "host_team",      default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "feats", ["match_id"], name: "index_feats_on_match_id"
+  add_index "feats", ["user_player_id"], name: "index_feats_on_user_player_id"
 
   create_table "matches", force: :cascade do |t|
     t.integer  "season_id"
     t.integer  "host_team_id"
     t.integer  "visit_team_id"
-    t.boolean  "finished"
-    t.integer  "host_result"
-    t.integer  "visit_result"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "finished",      default: false
+    t.integer  "host_result",   default: 0
+    t.integer  "visit_result",  default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "matches", ["season_id"], name: "index_matches_on_season_id"
@@ -126,18 +138,18 @@ ActiveRecord::Schema.define(version: 20151210094946) do
     t.integer  "template_player_id"
     t.integer  "dorsal_number"
     t.integer  "player_value"
-    t.integer  "injury"
-    t.integer  "complentions"
-    t.integer  "touchdowns"
-    t.integer  "interceptions"
-    t.integer  "casualties"
+    t.integer  "injury",             default: 0
+    t.integer  "complentions",       default: 0
+    t.integer  "touchdowns",         default: 0
+    t.integer  "interceptions",      default: 0
+    t.integer  "casualties",         default: 0
     t.integer  "mvp"
     t.integer  "ma"
     t.integer  "st"
     t.integer  "ag"
     t.integer  "av"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "list_skills"
     t.string   "title"
   end
@@ -148,16 +160,16 @@ ActiveRecord::Schema.define(version: 20151210094946) do
     t.integer  "user_id"
     t.string   "user_name"
     t.integer  "template_team_id"
-    t.integer  "treasury"
-    t.integer  "team_value"
-    t.integer  "re_rolls"
-    t.integer  "fan_factor"
-    t.integer  "assistant_coaches"
-    t.integer  "cheerleaders"
-    t.integer  "apothecaries"
-    t.integer  "halfling_chef"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "treasury",          default: 1000000
+    t.integer  "team_value",        default: 0
+    t.integer  "re_rolls",          default: 0
+    t.integer  "fan_factor",        default: 0
+    t.integer  "assistant_coaches", default: 0
+    t.integer  "cheerleaders",      default: 0
+    t.integer  "apothecaries",      default: 0
+    t.integer  "halfling_chef",     default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "active"
   end
 

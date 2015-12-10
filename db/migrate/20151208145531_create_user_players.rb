@@ -6,11 +6,11 @@ class CreateUserPlayers < ActiveRecord::Migration
       t.integer :template_player_id
       t.integer :dorsal_number
       t.integer :player_value
-      t.integer :injury
-      t.integer :complentions
-      t.integer :touchdowns
-      t.integer :interceptions
-      t.integer :casualties
+      t.integer :injury, default: 0
+      t.integer :complentions, default: 0
+      t.integer :touchdowns, default: 0
+      t.integer :interceptions, default: 0
+      t.integer :casualties, default: 0
       t.integer :mvp
       t.integer :ma
       t.integer :st

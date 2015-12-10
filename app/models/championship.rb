@@ -6,12 +6,6 @@ class Championship < ActiveRecord::Base
 
   validates :name, :kind, presence: true
 
-  after_initialize :init
-
-  def init
-    self.start ||=false      
-  end
-
 
   def self.start_seasons(id)
     championship = Championship.find_by(id: id)

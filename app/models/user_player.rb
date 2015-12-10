@@ -1,17 +1,7 @@
 class UserPlayer < ActiveRecord::Base
   belongs_to :user_team
+  has_many :feats
   serialize :list_skills, Array
-
-  after_initialize :init
-
-  def init
-    self.injury ||=0 
-    self.complentions ||=0
-    self.touchdowns ||=0 
-    self.interceptions ||=0
-    self.interceptions ||=0
-    self.casualties ||=0
-  end
 
 
   def self.assign_stats_from_the_template(player)
