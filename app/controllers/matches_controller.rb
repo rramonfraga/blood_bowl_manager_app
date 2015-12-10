@@ -12,5 +12,7 @@ class MatchesController < ApplicationController
     @visit_team = @match.visit_team
     @host_feats = @match.feats.host_feats
     @visit_feats = @match.feats.visit_feats
+    @feat = @match.feats.new
+    @players = @host_team.user_players + @visit_team.user_players
   end
 end

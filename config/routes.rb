@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :societies, only: [:index, :show, :new, :create] do
     resources :championships, only: [:show, :new, :create] do
-      resources :matches, only: [:show]
+      resources :matches, only: [:show] do
+        resources :feats, only: [:create, :update]
+      end
     end
   end
 
