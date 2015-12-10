@@ -1,0 +1,20 @@
+<h1><%= @host_team.user_name %> VS <%= @visit_team.user_name %></h1>
+
+<%= render '/layouts/grid_stats' %>
+
+<% @host_team.user_players.each do |player| %>
+  
+  <%= render partial: "player", locals: { player: player } %>
+
+<% end %>
+
+<br><br>
+
+<%= render '/layouts/grid_stats' %>
+
+<% @visit_team.user_players.each do |player| %>
+
+
+  <%= render partial: "player", locals: { player: player } %>
+
+<% end %>

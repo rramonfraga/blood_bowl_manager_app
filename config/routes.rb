@@ -6,12 +6,13 @@ Rails.application.routes.draw do
 
   resources :societies, only: [:index, :show, :new, :create] do
     resources :championships, only: [:show, :new, :create] do
-      resources :matches
+      resources :matches, only: [:show]
     end
   end
 
   get '/societies/:society_id/championships/:id/start_season' => 'championships#start_season'
 
+  get '/societies/:society_id/championships/:championship_id]}/match/:id/validate'
 
   resources :user_teams, only: [:index, :show, :new, :create,:update, :destroy] do
     resources :user_players, only: [:index, :new, :create, :update, :destroy]

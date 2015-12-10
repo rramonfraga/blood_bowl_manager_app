@@ -5,7 +5,12 @@
         <ul class="list-unstyled">
           <% season.matches.each do |match| %>
             <li data-match="<%= match.id %>">
-              <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %>
+              <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+                <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %>
+              </a>
+              <a href='<%= "/societies/#{params[:society_id]}/championships/#{params[:id]}/match/#{match.id}/validate" %>' class="btn btn-success" id="star-championship">
+                Validate Result
+              </a>
             </li>
           <% end %>
         </ul>

@@ -8,7 +8,20 @@
   </div>
 </div>
 
-<%= render '/layouts/grid_stats' %>
+<div class="row">
+  <div class="field col-sm-1 number">Nº</div>
+  <div class="field col-sm-1">Dorsal</div>
+  <div class="field col-sm-2 name">Name</div>
+  <div class="field col-sm-2 player">Title</div>
+  <div class=" col-sm-2 "><div class="row">
+    <div class="field col-sm-3 ma">MA</div>
+    <div class="field col-sm-3 st">ST</div>
+    <div class="field col-sm-3 ag">AD</div>
+    <div class="field col-sm-3 av">AV</div>
+  </div></div>
+  <div class="field col-sm-1 cost">Cost</div>
+  <div class="field col-sm-3 skill">Skills</div>
+</div>
 
 <div class = "js-player-form-container">
 <%= form_tag user_team_user_players_path(params[:user_team_id]) do %>
