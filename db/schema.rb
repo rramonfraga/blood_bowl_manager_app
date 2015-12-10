@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209180446) do
+ActiveRecord::Schema.define(version: 20151210094946) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "player_id"
@@ -29,17 +29,23 @@ ActiveRecord::Schema.define(version: 20151209180446) do
     t.string   "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "start"
   end
 
   add_index "championships", ["society_id"], name: "index_championships_on_society_id"
 
   create_table "matches", force: :cascade do |t|
-    t.integer  "championship_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "season_id"
+    t.integer  "host_team_id"
+    t.integer  "visit_team_id"
+    t.boolean  "finished"
+    t.integer  "host_result"
+    t.integer  "visit_result"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "matches", ["championship_id"], name: "index_matches_on_championship_id"
+  add_index "matches", ["season_id"], name: "index_matches_on_season_id"
 
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
@@ -79,6 +85,15 @@ ActiveRecord::Schema.define(version: 20151209180446) do
 
   add_index "registrations", ["championship_id"], name: "index_registrations_on_championship_id"
   add_index "registrations", ["user_team_id"], name: "index_registrations_on_user_team_id"
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer  "championship_id"
+    t.integer  "round"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "seasons", ["championship_id"], name: "index_seasons_on_championship_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"

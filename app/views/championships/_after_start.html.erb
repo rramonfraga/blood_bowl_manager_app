@@ -1,0 +1,14 @@
+<ul class="list-unstyled">
+  <% @championship.seasons.each do |season| %>
+    <li data-season="<%= season.id %>">
+      <h3>Round: <%= season.round  %></h3>
+        <ul class="list-unstyled">
+          <% season.matches.each do |match| %>
+            <li data-match="<%= match.id %>">
+              <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %>
+            </li>
+          <% end %>
+        </ul>
+    </li>
+  <% end %>
+</ul>

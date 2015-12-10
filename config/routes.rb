@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/societies/:society_id/championships/:id/start_season' => 'championships#start_season'
+
 
   resources :user_teams, only: [:index, :show, :new, :create,:update, :destroy] do
     resources :user_players, only: [:index, :new, :create, :update, :destroy]

@@ -1,0 +1,16 @@
+<ul class="list-unstyled">
+  <% @championship.user_teams.each do |team| %>
+    <li data-team="<%= team.id %>">
+      <h2>
+          <%= team.user_name  %>
+      </h2>
+    </li>
+  <% end %>
+</ul>
+
+<a href="#" class="btn btn-success" value="#{params[:id]}" id="join-championship">
+  + Join to <%= @championship.name %>
+</a>
+<a href='<%= "/societies/#{params[:society_id]}/championships/#{params[:id]}/start_season" %>' class="btn btn-success" id="star-championship">
+  Start <%= @championship.name %>
+</a>
