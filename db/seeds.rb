@@ -52,7 +52,7 @@ end
 
 
 def create_users
-  3.times do | index |
+  4.times do | index |
     User.create name: "User #{index + 1}", 
                 email: "email#{index + 1}@email.com",
                 password: "patata00",
@@ -61,24 +61,40 @@ def create_users
 end
 
 def create_societies
-  3.times do | index |
-    soc1 = Society.create name: "Society #{index + 1}"
-    soc2 = Society.create name: "Society #{index + 4}"
+  society = Society.create name: "Society 1"
+  4.times do | index |
     user = User.find_by(name: "User #{index +1}")
-    realsociety = Society.find_by(name: "Society 1")
-    unless 1 != index 
-      user.societies << realsociety
-    end
-    user.societies << soc1
-    user.societies << soc2
+    user.societies << society
   end
 end
 
 def create_championships
-  3.times do |index|
-    soc = Society.find_by(name: "Society #{index + 1}")
-    soc.championships.create name: "Championship #{index + 1}", kind: "League"
-    soc.championships.create name: "Championship #{index + 2}", kind: "League"
+  society = Society.find_by(name: "Society 1")
+  society.championships.create name: "Championship", kind: "League"
+end
+
+def create_user_team_and_players
+  4.times do | index |
+    user = User.find_by(name: "User #{index +1}")
+    random = Random.new
+    random = random.rand(24)
+    team = user.user_teams.create user_name: "Team #{index + 1}",
+                                  template_team_id: random,
+                                  re_rolls: 2,
+                                  fan_factor: 0,
+                                  assistant_coaches: 0,
+                                  cheerleaders: 0,
+                                  apothecaries: 0,
+                                  halfling_chef: 0
+    11.times do |index| 
+      number = Team.find_by(id: random).players.first.id
+      player = team.user_players.create user_name: "Player #{index + 1}",
+                                        dorsal_number: "#{index + 1}",
+                                        template_player_id: number
+      UserPlayer.assign_stats_from_the_template(player)
+    end
+    championship = Championship.find_by(name: "Championship")
+    team.championships << championship
   end
 end
 
@@ -89,6 +105,7 @@ create_players
 create_users
 create_societies
 create_championships
+create_user_team_and_players
 
 
 

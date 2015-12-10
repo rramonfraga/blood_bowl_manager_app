@@ -1,2 +1,11 @@
-<h1> Championship </h1>
+<h1><%= @championship.name %></h1>
 
+<ul class="list-unstyled">
+  <% @championship.user_teams.each do |team| %>
+    <li data-bbq="<%= team.id %>">
+      <h2>
+          <%= team.user_name  %>
+      </h2>
+    </li>
+  <% end %>
+</ul>

@@ -4,6 +4,10 @@ class UserTeam < ActiveRecord::Base
 
   has_many :registrations
   has_many :championships, through: :registrations
+  has_many :hosting, :class_name => 'Match', :foreing_key => 'host_team_id'
+  has_many :visiting, :class_name => 'Match', :foreing_key => 'visitor_team_id'
+
+
 
   after_initialize :init
 
