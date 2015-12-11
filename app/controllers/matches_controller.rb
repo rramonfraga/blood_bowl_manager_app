@@ -6,13 +6,10 @@ class MatchesController < ApplicationController
     @visit_team = @match.visit_team
   end
 
-  def validate
+  def finished
+    binding.pry
     @match = Match.find_by(id: params[:id])
-    @host_team = @match.host_team
-    @visit_team = @match.visit_team
-    @host_feats = @match.feats.host_feats
-    @visit_feats = @match.feats.visit_feats
-    @feat = @match.feats.new
-    @players = @host_team.user_players + @visit_team.user_players
+    @match.finished!
+    redirect_to "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}"
   end
 end

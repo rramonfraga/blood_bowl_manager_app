@@ -8,9 +8,15 @@
               <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
                 <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %>
               </a>
-              <a href='<%= "/societies/#{params[:society_id]}/championships/#{params[:id]}/match/#{match.id}/validate" %>' class="btn btn-success" id="star-championship">
+              <% current_user.user_teams.each do |team|%>
+                <% if team.id == match.host_team.id || team.id == match.visit_team.id %>
+                  <% if match.finished == false %>
+                  <a href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>" class="btn btn-success" id="star-championship">
                 Validate Result
-              </a>
+                  </a>
+                  <% end %>
+                <% end %>
+              <% end %>
             </li>
           <% end %>
         </ul>

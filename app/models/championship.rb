@@ -7,42 +7,30 @@ class Championship < ActiveRecord::Base
   validates :name, :kind, presence: true
 
 
-  def self.start_seasons(id)
-    championship = Championship.find_by(id: id)
-    teams_ids = Championship.arrays_with_ids_team(championship)
-
+  def start_seasons
+    teams_ids = self.arrays_with_ids_team
     (teams_ids.size - 1).times do |index|
-      season = championship.seasons.create round: index + 1
-      Championship.create_matches(season, teams_ids)
-      teams_ids = Championship.rotate_teams!(teams_ids)
+      season = self.seasons.create round: index + 1
+      season.create_matches(teams_ids)
+      teams_ids = self.rotate_teams!(teams_ids)
     end
-
-    Championship.start!(championship)
+    self.start!
   end
 
-
-  private
-  def self.rotate_teams!(teams_ids)
+  def rotate_teams!(teams_ids)
     last = teams_ids.pop
     teams_ids.insert(1, last)
   end
 
-  def self.arrays_with_ids_team(championship)
-    championship.user_teams.map do |team|
+  def arrays_with_ids_team
+    self.user_teams.map do |team|
       team.id
     end
   end
 
-  def self.start!(championship)
-    championship.start = true
-    championship.save
-  end
-
-  def self.create_matches(season, teams_ids)
-    teams_ids.size/2.times do |index|
-      season.matches.create host_team: UserTeam.find_by(id: teams_ids[index]),
-                            visit_team: UserTeam.find_by(id: teams_ids[(teams_ids.size - 1) - index])
-    end
+  def start!
+    self.start = true
+    self.save
   end
 
 end

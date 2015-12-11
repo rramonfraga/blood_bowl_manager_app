@@ -4,5 +4,10 @@ class Match < ActiveRecord::Base
   belongs_to :visit_team, :class_name => 'UserTeam', :foreign_key => 'visit_team_id'
   has_many :feats
 
+  def finished!
+    self.finished = true
+    self.save
+  end
+
 
 end

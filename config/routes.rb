@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   resources :societies, only: [:index, :show, :new, :create] do
     resources :championships, only: [:show, :new, :create] do
       resources :matches, only: [:show] do
-        resources :feats, only: [:create, :update]
+        resources :feats, only: [:new, :create, :update]
       end
     end
   end
 
   get '/societies/:society_id/championships/:id/start_season' => 'championships#start_season'
+  get '/societies/:society_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
 
-  get '/societies/:society_id/championships/:championship_id/match/:id/validate' => 'matches#validate'
 
   resources :user_teams, only: [:index, :show, :new, :create,:update, :destroy] do
     resources :user_players, only: [:index, :new, :create, :update, :destroy]

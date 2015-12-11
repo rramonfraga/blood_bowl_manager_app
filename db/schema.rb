@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "match_id"
     t.integer  "user_player_id"
     t.string   "kind"
+    t.integer  "kind_number"
     t.boolean  "host_team",      default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
