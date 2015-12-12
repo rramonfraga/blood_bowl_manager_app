@@ -7,7 +7,6 @@ class MatchesController < ApplicationController
   end
 
   def finished
-    binding.pry
     @match = Match.find_by(id: params[:id])
     @match.finished!
     redirect_to "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}"

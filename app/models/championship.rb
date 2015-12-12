@@ -6,6 +6,17 @@ class Championship < ActiveRecord::Base
 
   validates :name, :kind, presence: true
 
+  def has_team_included?(team)
+    self.user_teams.reduce(false) do |included, championship_team|
+      included || championship_team.id == team.id
+    end
+  end
+
+  def has_team_included_a_user?(user)
+    user.user_teams.reduce(false) do |included, team|
+      included || self.has_team_included?(team)
+    end
+  end
 
   def start_seasons
     teams_ids = self.arrays_with_ids_team

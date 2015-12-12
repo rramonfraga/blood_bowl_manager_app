@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   end
 
   get '/societies/:society_id/championships/:id/start_season' => 'championships#start_season'
-  get '/societies/:society_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
+  post '/societies/:society_id/championships/:id/join' => 'championships#join'
 
+  get '/societies/:society_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
 
   resources :user_teams, only: [:index, :show, :new, :create,:update, :destroy] do
     resources :user_players, only: [:index, :new, :create, :update, :destroy]

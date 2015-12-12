@@ -1,10 +1,9 @@
 (function main () {
   "use strict";
 
-  $(document).on('chilck', '#star-championship', function () {
+  $('[data-hook~=join-championship]').on('click', function (event) {
 
-
-  });
+  })
 
 
 })();
