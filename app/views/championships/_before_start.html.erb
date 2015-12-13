@@ -11,13 +11,10 @@
 <% unless @championship.has_team_included_a_user?(current_user) %>
   <% current_user.user_teams.each do |team| %>
     <%= button_to "Join - #{team.user_name}", {:controller => "championships", :action => "join", :id => @championship.id, :society_id => @championship.society.id, :team_id => team.id }  , :method=>:post, class: "btn btn-success"  %> <br>
-      
   <% end %>   
 <% end %>
 
 
 <br><br>
 
-<a href='<%= "/societies/#{params[:society_id]}/championships/#{params[:id]}/start_season" %>' class="btn btn-success" id="star-championship">
-  Start <%= @championship.name %>
-</a>
+<%= button_to "Start #{@championship.name}", {:controller => "championships", :action => "start", :id => @championship.id, :society_id => @championship.society.id }  , :method=>:post, class: "btn btn-success"  %>

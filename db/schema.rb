@@ -48,17 +48,17 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   add_index "feats", ["user_player_id"], name: "index_feats_on_user_player_id"
 
   create_table "matches", force: :cascade do |t|
-    t.integer  "season_id"
+    t.integer  "championship_id"
     t.integer  "host_team_id"
     t.integer  "visit_team_id"
-    t.boolean  "finished",      default: false
-    t.integer  "host_result",   default: 0
-    t.integer  "visit_result",  default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "finished",        default: false
+    t.integer  "host_result",     default: 0
+    t.integer  "visit_result",    default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
-  add_index "matches", ["season_id"], name: "index_matches_on_season_id"
+  add_index "matches", ["championship_id"], name: "index_matches_on_championship_id"
 
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
@@ -171,7 +171,6 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "halfling_chef",     default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.boolean  "active"
   end
 
   add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id"

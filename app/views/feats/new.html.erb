@@ -45,12 +45,12 @@
 
   <div class="form-group">
     <%= form.label "Player" %><br>
-    <%= form.collection_select(:user_player_id, @players, :id, :user_name ) %>
+    <%= form.collection_select(:user_player_id, @players, :id, :user_name, {},{class: "form-control"} ) %>
   </div>
   
   <div class="form-group">
-    <%= form.label :kind %><br>
-    <select name="kind" id="kind" >
+    <%= form.label :kind%><br>
+    <select name="kind" id="kind" class="form-control"  >
       <option value="injury">Injury</option>
       <option value="complentions">Complentions</option>
       <option value="touchdowns">Touchdowns</option>
@@ -65,11 +65,10 @@
     <%= form.number_field :kind_number, class: 'form-control' %>
   </div>
   
-  <div class=" btn btn-success">
-    <%= submit_tag "Validate" %>
+  <div class="form-group">
+    <%= submit_tag "Validate", class: "btn btn-success"  %>
   </div>
 <% end %>
-<a href='<%= "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}/matches/#{params[:match_id]}/finished" %>' class="btn btn-success" id="star-championship">
-  Fisish Match
-</a>
+
+<%= button_to "Finish", {:controller => "matches", :action => "finished", :society_id => params["society_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-success"  %>
 

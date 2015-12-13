@@ -1,25 +1,58 @@
+<div class="row">
+<section class="col-sm-4">
 <ul class="list-unstyled">
   <% @championship.seasons.each do |season| %>
+
     <li data-season="<%= season.id %>">
-      <h3>Round: <%= season.round  %></h3>
-        <ul class="list-unstyled">
-          <% season.matches.each do |match| %>
-            <li data-match="<%= match.id %>">
-              <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
-                <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %>
-              </a>
-              <% current_user.user_teams.each do |team|%>
-                <% if team.id == match.host_team.id || team.id == match.visit_team.id %>
-                  <% if match.finished == false %>
-                  <a href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>" class="btn btn-success" id="star-championship">
-                Validate Result
-                  </a>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </li>
+    <h3>Round: <%= season.round  %></h3>
+      
+      <ul class="list-unstyled">
+      <% season.matches.each do |match| %>
+        
+
+        <li data-match="<%= match.id %>">
+        <% if match.finished == true %>
+          <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+          <%= match.host_result.to_s + " - "+ match.host_team.user_name %> VS <%= match.visit_team.user_name + " - " +  match.visit_result.to_s%></a>
+        <% else %>
+          <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+          <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %></a>
+        <% end %>
+        
+
+        <% current_user.user_teams.each do |team|%>
+          <% if team.id == match.host_team.id || team.id == match.visit_team.id %>
+            <% if match.finished == false %>
+              <a href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>" class="btn btn-success" id="star-championship">
+              Validate Result </a>
+            <% end %>
           <% end %>
-        </ul>
-    </li>
+        <% end %></li>
+
+      <% end %></ul></li>
+
   <% end %>
 </ul>
+</section>
+<section class="col-sm-8">
+  <div class="row">
+    <div class="col-sm-6">
+      Team Name
+    </div>
+    <div class="col-sm-6">
+      Points
+    </div>
+  </div>
+  <% @clasification.each do |team| %>
+    <div class="row">
+      <div class="col-sm-6">
+        <% #team.user_name %>
+      </div>
+      <div class="col-sm-6">
+        <% #team.calculate_points %>
+      </div>
+    </div>
+  <% end %>
+
+</section>
+</div>

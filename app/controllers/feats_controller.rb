@@ -12,7 +12,7 @@ class FeatsController < ApplicationController
                                 kind: params["kind"],
                                 kind_number: params["feat"]["kind_number"]
     @feat.assign_touchdonw
-    redirect_to "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}/matches/#{params[:match_id]}/feats/new"
+    redirect_to action: 'new', controller: 'feats', society_id: params["society_id"], championship_id: params["championship_id"], match_id: params["match_id"]
   end
 
   def update

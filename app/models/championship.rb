@@ -3,6 +3,7 @@ class Championship < ActiveRecord::Base
   has_many :registrations
   has_many :user_teams, through: :registrations
   has_many :seasons
+  has_many :matches, through: :seasons
 
   validates :name, :kind, presence: true
 
@@ -42,6 +43,12 @@ class Championship < ActiveRecord::Base
   def start!
     self.start = true
     self.save
+  end
+
+  def clasification
+    self.user_teams.sort do |team1, team2|
+      team1.calculate_points(self) <=> team2.calculate_points(self)
+    end
   end
 
 end

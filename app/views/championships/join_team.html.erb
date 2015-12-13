@@ -1,9 +1,0 @@
-<ul class="list-unstyled">
-  <% current_user.user_teams.each do |team| %>
-    <li data-team="<%= team.id %>">
-      <h2>
-          <%= team.user_name  %>
-      </h2>
-    </li>
-  <% end %>
-</ul>

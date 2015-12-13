@@ -3,8 +3,8 @@
 <div class="cointainer">
   <div class="row">
     <h2 class="col-sm-6"><%= @user_team.user_name %></h2>
-    <h2 class="col-sm-3"> Treasury: </h2>
-    <h2 class="col-sm-3 js-treasury"><%= @user_team.treasury %></h2>
+    <h2 class="col-sm-3" > Treasury: </h2>
+    <h2 class="col-sm-3 js-treasury" data-treasury="<%=@user_team.treasury%>"><%= @user_team.treasury %></h2>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
   <div class="field col-sm-1">Dorsal</div>
   <div class="field col-sm-2 name">Name</div>
   <div class="field col-sm-2 player">Title</div>
-  <div class=" col-sm-2 "><div class="row">
+  <div class="col-sm-2 "><div class="row">
     <div class="field col-sm-3 ma">MA</div>
     <div class="field col-sm-3 st">ST</div>
     <div class="field col-sm-3 ag">AD</div>
@@ -34,14 +34,14 @@
           <%= index + 1 %>
         </div>
         <div class="field col-sm-1 dorsal">
-          <%= p.text_field :dorsal_number %>
+          <%= p.text_field :dorsal_number, :class => "form-control" %>
         </div>
         <div class="field col-sm-2 name">
-          <%= p.text_field :user_name %>
+          <%= p.text_field :user_name, :class => "form-control"  %>
         </div>
 
-        <div class="field col-sm-2 player">
-          <%= p.collection_select(:template_player_id, Team.find_by(id: @user_team.template_team_id).players, :id, :title, {:include_blank => ""}, {:class => "js-player"} ) %>
+        <div class="field col-sm-2 js-player">
+          <%= p.collection_select(:template_player_id, Team.find_by(id: @user_team.template_team_id).players, :id, :title, {:include_blank => ""}, {:class => "player_selection form-control js-player"} ) %>
         </div>
         
         <div class='js-stats-cointainer'></div>
@@ -51,7 +51,7 @@
     <% end %>
   <% end %>
   <div class="actions">
-    <%= submit_tag("Create Team") %>
+    <%= submit_tag "Create Team" , :class => "btn btn-success"%>
   </div>
 <% end %>
 </div>

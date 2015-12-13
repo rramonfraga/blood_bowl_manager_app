@@ -9,16 +9,18 @@ class UserPlayersController < ApplicationController
   end
 
   def create
+    user_team = UserTeam.find_by(id: params[:user_team_id])
     if params.has_key?("player")
-      UserTeam.find_by(id: params[:user_team_id]).user_players.create(player_params(params["player"]))
+      user_team.user_players.create(player_params(params["player"]))
     else
       params["players"].each do |player|
         if player["dorsal_number"] != "" || player["user_name"] != ""
           new_player = UserTeam.find_by(id: params[:user_team_id]).user_players.create(player_params(player))
-          UserPlayer.assign_stats_from_the_template(new_player)
+          new_player.assign_stats_from_the_template
         end
       end
     end
+    user_team.calculate_treasury!
     redirect_to '/'
   end
 

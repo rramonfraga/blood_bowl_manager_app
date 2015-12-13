@@ -91,10 +91,11 @@ def create_user_team_and_players
       player = team.user_players.create user_name: "Player #{index + 1}",
                                         dorsal_number: "#{index + 1}",
                                         template_player_id: number
-      UserPlayer.assign_stats_from_the_template(player)
+      player.assign_stats_from_the_template
     end
     championship = Championship.find_by(name: "Championship")
     team.championships << championship
+    team.calculate_treasury!
   end
 end
 

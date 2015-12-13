@@ -1,7 +1,8 @@
 class CreateMatches < ActiveRecord::Migration
   def change
     create_table :matches do |t|
-      t.references :season, index: true
+
+      t.references :championship, index: true
       t.integer :host_team_id
       t.integer :visit_team_id
       t.boolean :finished, default: false

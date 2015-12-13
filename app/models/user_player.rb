@@ -4,16 +4,16 @@ class UserPlayer < ActiveRecord::Base
   serialize :list_skills, Array
 
 
-  def self.assign_stats_from_the_template(player)
-    template_player = Player.find_by(id: player["template_player_id"])
-    player["player_value"] = template_player["cost"]
-    player["title"] = template_player["title"]
-    player["ma"] = template_player["ma"]
-    player["st"] = template_player["st"]
-    player["ag"] = template_player["ag"]
-    player["av"] = template_player["av"]
-    player["list_skills"] = template_player["list_skills"]
-    player.save
+  def assign_stats_from_the_template
+    template_player = Player.find_by(id: self.template_player_id)
+    self.player_value = template_player.cost
+    self.title = template_player.title
+    self.ma = template_player.ma
+    self.st = template_player.st
+    self.ag = template_player.ag
+    self.av = template_player.av
+    self.list_skills = template_player.list_skills
+    self.save
   end
 
   def experience

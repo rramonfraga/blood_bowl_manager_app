@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+#video-background {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: -100;
+    background: #fff  ; /* Para Internet Explorer */
+    background: rgba(255,255,255,.5)  ;
+    box-sizing:;
+}
+
+#video-background::before > section {
+    margin-right:0;
+    margin-left: 0;
+    background: rgba(205,205,205,.5)  ;
+}
+
+
+.devise-user-containers{
+    background: #fff  ; /* Para Internet Explorer */
+    background: rgba(255,255,255,.5)  ;
+    font-size: 2rem;
+    padding: 50px 0;
+    text-align: center;
+    width: 100%;
+}

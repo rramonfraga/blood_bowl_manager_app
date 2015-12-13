@@ -7,8 +7,8 @@ class MatchesController < ApplicationController
   end
 
   def finished
-    @match = Match.find_by(id: params[:id])
-    @match.finished!
-    redirect_to "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}"
+    match = Match.find_by(id: params[:id])
+    match.finished!
+    redirect_to action: 'show', controller: 'championships', society_id: params["society_id"], id: params["championship_id"]
   end
 end
