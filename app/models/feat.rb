@@ -14,6 +14,21 @@ class Feat < ActiveRecord::Base
     end
   end
 
+  def assign_experience!
+    player = self.user_player
+    case self.kind
+    when "injury" 
+      player.add_experience!(2)
+    when "complentions" 
+      player.add_experience!(1)
+    when "touchdowns" 
+      player.add_experience!(3)
+    when "interceptions" 
+      player.add_experience!(2)
+    when "mpv" 
+      player.add_experience!(5)
+    end
+  end
 
 
 end

@@ -7,8 +7,8 @@ class Match < ActiveRecord::Base
 
   def finished!
     self.finished = true
+    self.assign_experience_from_feats!
     self.save
-  
   end
 
   def winner_id
@@ -30,6 +30,12 @@ class Match < ActiveRecord::Base
       visit_result
     else
       0
+    end
+  end
+
+  def assign_experience_from_feats!
+    self.feats.each do |feat|
+      feat.assign_experience!
     end
   end
 

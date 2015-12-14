@@ -7,6 +7,8 @@ class CreateUserPlayers < ActiveRecord::Migration
       t.integer :dorsal_number
       t.integer :player_value
       t.integer :experience, default: 0
+      t.string :level, default: "Rookie"
+      t.boolen :level_up, default: false
       t.integer :mvp
       t.integer :ma
       t.integer :st
