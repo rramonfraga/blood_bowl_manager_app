@@ -47,7 +47,7 @@ class Championship < ActiveRecord::Base
 
   def clasification
     self.user_teams.sort do |team1, team2|
-      team1.calculate_points(self) <=> team2.calculate_points(self)
+      team2.calculate_points(self) <=> team1.calculate_points(self)
     end
   end
 

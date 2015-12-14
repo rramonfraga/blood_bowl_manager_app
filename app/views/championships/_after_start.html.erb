@@ -35,24 +35,40 @@
 </ul>
 </section>
 <section class="col-sm-8">
+  <h3>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-3">
+      Position
+    </div>
+    <div class="col-sm-4">
       Team Name
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-2">
       Points
     </div>
+    <div class="col-sm-3">
+      TD
+    </div>
   </div>
-  <% @clasification.each do |team| %>
+  </h3>
+
+  <% @clasification.each_with_index do |team, index| %>
     <div class="row">
-      <div class="col-sm-6">
-        <% #team.user_name %>
+      <div class="col-sm-3">
+        <%= index + 1 %>º
       </div>
-      <div class="col-sm-6">
-        <% #team.calculate_points %>
+      <div class="col-sm-4">
+        <%= team.user_name %>
+      </div>
+      <div class="col-sm-2">
+        <%= team.calculate_points(@championship) %>
+      </div>
+      <div class="col-sm-3">
+        <%= team.calculate_touchdonws(@championship) %>
       </div>
     </div>
   <% end %>
 
 </section>
 </div>
+

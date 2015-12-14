@@ -21,13 +21,13 @@
     z-index: -100;
     background: #fff  ; /* Para Internet Explorer */
     background: rgba(255,255,255,.5)  ;
-    box-sizing:;
 }
 
-#video-background::before > section {
+#video-background > section.container-fluid.home {
     margin-right:0;
     margin-left: 0;
-    background: rgba(205,205,205,.5)  ;
+    background: rgba(205,205,205,.5);
+    width: 100%;
 }
 
 

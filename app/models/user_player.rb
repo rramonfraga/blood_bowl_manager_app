@@ -16,7 +16,7 @@ class UserPlayer < ActiveRecord::Base
     self.save
   end
 
-  def experience
-     self.injury*2 + self.complentions + self.touchdowns*3 + self.interceptions
+  def calculate_experience
+     
   end
 end

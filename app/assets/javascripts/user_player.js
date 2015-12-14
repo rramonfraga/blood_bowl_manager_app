@@ -11,7 +11,7 @@
     request.done(function (player) {
       var htmlSkill = ""
       player.list_skills.forEach( function (skill) {
-        htmlSkill = htmlSkill + skill + ", "
+        htmlSkill = htmlSkill + '<a href="#" class="js-skill" data-skill="' + skill + '">' +skill + "</a>, "
       });
       var htmlParts = [
         '<div class=" col-sm-2 ">',
@@ -23,12 +23,13 @@
         '  </div>',
         '</div>',
         '<div class="field col-sm-1 js-cost" data-cost="' + player.cost + '" >' + player.cost + '</div>',
-        '<div class="field col-sm-3 skill">' + htmlSkill +'</div>'
+        '<div class="field col-sm-3">' + htmlSkill +'</div>'
         ];
 
 
       $select.parent().next().html(htmlParts.join('\n'));
       $('.js-treasury').html(calculate_treasury());
+
     });
   });
   
@@ -39,5 +40,27 @@
     });
     return treasury;
   }
+
+  $(document).on('click', '.js-skill', function (event){
+      var self = this;
+      var $select = $(event.currentTarget);
+      var skillName = $select.data("skill");
+      var request = $.get('/api/skills/');
+      request.fail(function () {
+      });
+
+      request.done(function (skills) {
+        var skillDescription
+        skills.forEach( function (skill) {
+          if (skill.name === skillName){
+            skillDescription = skill.description;
+          }
+        });
+        $(".modal-title").html($("<p>"+ skillName +"</p>"));
+        $(".modal-body").html($('<p><i>"'+ skillDescription +'"<i></p>'));
+        $("#smallModal").modal("show")
+      });
+    });
+
 
 })();

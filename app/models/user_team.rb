@@ -27,4 +27,10 @@ class UserTeam < ActiveRecord::Base
     end
   end
 
+  def calculate_touchdonws(championship)
+    championship.matches.reduce(0) do |touchdonws, match|
+      touchdonws + match.touchdonws(self)
+    end
+  end
+
 end
