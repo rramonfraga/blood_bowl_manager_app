@@ -8,27 +8,24 @@
 </head>
 <body data-hook="controller-<%= controller_name %> action-<%= action_name %>">
   <header>
-    <div class="container nav">
+    <div class="container">
       <div class="logo">
-        <p id="logo"> BLOOD BOWL MANAGER APP </p>
+        <img src='<%= asset_path("logo2.png")%>' alt="logo">
       </div>
-    <nav class="pull-right">
+    <nav>
       <% if current_user %>
-
         <ul class="nav nav-pills">
-          <li role="presentation"><a href="<%= societies_path %>" class="btn btn-blood">
+          <li><a href="<%= societies_path %>">
             Societies
           </a></li>
-          <li role="presentation"><a href="<%= user_teams_path %>" class="btn btn-blood">
-            Show Team
+          <li><a href="<%= user_teams_path %>">
+            Show Teams
           </a></li>
-          <li role="presentation"><a href="<%= new_user_team_path %>" class="btn btn-blood">
+          <li><a href="<%= new_user_team_path %>">
             Create a new Team
           </a></li>
-          <li role="presentation"><%= link_to current_user.name.capitalize, '#' %></li>
-          <li role="presentation"><%= link_to current_user.email, '#'%></li>
 
-          <li role="presentation" ><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blood" %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blood" %></li>
         </ul> 
       <% else %> 
         <ul class="nav nav-pills"> 
@@ -47,7 +44,7 @@
   <footer>
     <div class="container footer">
       <div class="logo-icon">
-        <p id="logo-icon"> BLOOD BOWL MANAGER APP </p>
+        <img src='<%= asset_path("logo2.png")%>' alt="logo" height="55px">
       </div>
       <div class="icons">
       <a href="https://twitter.com/rramonfraga" class="twitter-follow-button" data-show-count="false">Follow @rramonfraga</a>

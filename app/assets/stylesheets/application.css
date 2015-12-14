@@ -17,61 +17,33 @@
 
 
 
-.icons{
-  padding: 20px;
-  text-align: right;
-  width: 40%;
-}
-
-.logo{
-  width: 100%;
-  text-align: center;
-}
-
-#logo{
-  font-family: "Blood Blocks";
-  font-size: 70px;
-  color:#8c0000;
-}
-
-.logo-icon{
-  width: 60%;
-}
-
-#logo-icon{
-  font-family: "Blood Blocks";
-  font-size: 40px;
-  color:#8c0000;
-}
 
 #main{
     background-color:#ecf0f1;
-    position:relative;
     height: 100%;
     overflow:auto;
     min-height: 83vh;
-    padding-bottom: 60px
-
 }
 
 
 .user-devise{
-    background: #2ecc71;
     position: relative; 
     float: right;
     padding: 50px;
     border-radius: 20px;
 }
 
+#video{
+  position: absolute;
+}
+
 
 #video-background {
-    height: 100%;
-    position: relative;
+    height: auto;
     top: 0;
     left: 0;
     width: 100%;
     z-index: -100;
-    background: #fff  ; /* Para Internet Explorer */
     background: rgba(255,255,255,.5)  ;
 }
 
@@ -83,7 +55,7 @@
     padding: 50px 0;
     text-align: center;
     width: 100%;
-    height: 100%;
-    position:absolute;
+    height: auto;
+    position:relative;
     top:0;
 }

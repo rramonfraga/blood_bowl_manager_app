@@ -12,10 +12,10 @@
 
         <li data-match="<%= match.id %>">
         <% if match.finished == true %>
-          <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+          <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
           <%= match.host_result.to_s + " - "+ match.host_team.user_name %> VS <%= match.visit_team.user_name + " - " +  match.visit_result.to_s%></a>
         <% else %>
-          <a href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+          <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
           <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %></a>
         <% end %>
         

@@ -1,7 +1,26 @@
 header{
-    background-color: #1c1e20;
+  background-color: #004377;
 }
 
-.pull-right{
+nav{
+  width: 58%;
+  margin:auto;
+  margin-top: -8px;
+}
+
+.logo{
+  width: 100%;
   text-align: center;
+}
+
+.nav-pills>li>a{
+  border-radius: 0px;
+  color: #ecf0f1;
+  font-size: 16px;
+  border-radius: 0;
+  padding: 6px 15px;
+}
+.nav-pills>li>a:hover{
+  background-color: #8c0000;
+  border-radius: 0px;
 }

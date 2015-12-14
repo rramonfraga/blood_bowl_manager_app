@@ -3,13 +3,15 @@
   src: url(/assets/Blood-Blocks.ttf) format("truetype");
 }
 
+.championship .match{
+  color: #8c0000;
+  font-size: 16px;
+}
+
 .btn-blood{
   color: #ecf0f1;
   background-color: #8c0000;
   border-color: #3c0000;
+
 }
 
-a{
-  color: #8c0000;
-  font-size: 16px;
-}
