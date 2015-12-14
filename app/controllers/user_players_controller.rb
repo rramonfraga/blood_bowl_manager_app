@@ -24,8 +24,12 @@ class UserPlayersController < ApplicationController
     redirect_to '/'
   end
 
+  def edit
+    @player = UserPlayer.find_by(id: params[:id])
+  end
+
   def update
-    
+    @player = UserPlayer.find_by(id: params[:id])
   end
 
   def destoy

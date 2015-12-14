@@ -140,13 +140,15 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "dorsal_number"
     t.integer  "player_value"
     t.integer  "experience",         default: 0
+    t.string   "level",              default: "Rookie"
+    t.boolean  "level_up",           default: false
     t.integer  "mvp"
     t.integer  "ma"
     t.integer  "st"
     t.integer  "ag"
     t.integer  "av"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "list_skills"
     t.string   "title"
   end

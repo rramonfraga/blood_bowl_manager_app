@@ -23,7 +23,7 @@
         <% current_user.user_teams.each do |team|%>
           <% if team.id == match.host_team.id || team.id == match.visit_team.id %>
             <% if match.finished == false %>
-              <a href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>" class="btn btn-success" id="star-championship">
+              <a href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>" class="btn btn-blood" id="star-championship">
               Validate Result </a>
             <% end %>
           <% end %>

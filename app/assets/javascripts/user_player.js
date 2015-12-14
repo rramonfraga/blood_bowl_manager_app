@@ -58,9 +58,9 @@
         });
         $(".modal-title").html($("<p>"+ skillName +"</p>"));
         $(".modal-body").html($('<p><i>"'+ skillDescription +'"<i></p>'));
-        $("#smallModal").modal("show")
+        $("#smallModal").modal("show");
       });
     });
-
+    
 
 })();

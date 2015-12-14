@@ -1,3 +1,4 @@
+<section class="container">
 <h1> Create a new Team </h1>
 
 <%= form_for @user_team do |form| %>
@@ -22,7 +23,8 @@
   </div>
 
   <div class="actions">
-    <%= form.submit (@user_team.new_record? ? 'Create Team' : 'Update Team'), :class => "btn btn-success" %>
+    <%= form.submit (@user_team.new_record? ? 'Create Team' : 'Update Team'), :class => "btn btn-blood" %>
   </div>
 
 <% end %>
+</section>

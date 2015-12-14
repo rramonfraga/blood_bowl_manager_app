@@ -1,3 +1,4 @@
+<section class="container">
 <h1>Validate Match</h1>
 <div class="row">
   <div class="col-sm-5">
@@ -70,5 +71,6 @@
   </div>
 <% end %>
 
-<%= button_to "Finish", {:controller => "matches", :action => "finished", :society_id => params["society_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-success"  %>
+<%= button_to "Finish", {:controller => "matches", :action => "finished", :society_id => params["society_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-blood"  %>
 
+</section>

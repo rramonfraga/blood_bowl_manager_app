@@ -1,0 +1,12 @@
+<section class="container">
+<%= render '/layouts/grid_stats' %>
+
+
+<%= render partial: "/layouts/player", locals: { player: @player } %>
+
+<% if @player.level_up == true %>
+
+  <div class="js-level-up" value="<%= player.templete_player_id %>"></div>
+
+<% end %>
+</section>

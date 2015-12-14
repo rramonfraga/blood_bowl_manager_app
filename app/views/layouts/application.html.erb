@@ -7,37 +7,55 @@
   <%= csrf_meta_tags %>
 </head>
 <body data-hook="controller-<%= controller_name %> action-<%= action_name %>">
-    <header>
+  <header>
     <div class="container nav">
-      <nav class="pull-right">
-        <% if current_user %>
+      <div class="logo">
+        <p id="logo"> BLOOD BOWL MANAGER APP </p>
+      </div>
+    <nav class="pull-right">
+      <% if current_user %>
 
-          <ul class="nav nav-pills">
-            <li role="presentation"><a href="<%= user_teams_path %>" class="btn btn-primary">
-              Show Team
-            </a></li>
-            <li role="presentation"><a href="<%= new_user_team_path %>" class="btn btn-primary">
-              Create a new Team
-            </a></li>
-            <li role="presentation"><%= link_to current_user.name.capitalize, '#' %></li>
-            <li role="presentation"><%= link_to current_user.email, '#'%></li>
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="<%= societies_path %>" class="btn btn-blood">
+            Societies
+          </a></li>
+          <li role="presentation"><a href="<%= user_teams_path %>" class="btn btn-blood">
+            Show Team
+          </a></li>
+          <li role="presentation"><a href="<%= new_user_team_path %>" class="btn btn-blood">
+            Create a new Team
+          </a></li>
+          <li role="presentation"><%= link_to current_user.name.capitalize, '#' %></li>
+          <li role="presentation"><%= link_to current_user.email, '#'%></li>
 
-            <li role="presentation" class="active" ><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-          </ul> 
-        <% else %> 
-          <ul class="nav nav-pills"> 
-            <li role="presentation" class="active" ><%= link_to "Log In", new_user_session_path %></a></li> 
-            <li role="presentation"><%= link_to "Register", new_user_registration_path %></a></li> 
-          </ul> 
-        <% end %>
-      </nav>
-    </div>
+          <li role="presentation" ><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blood" %></li>
+        </ul> 
+      <% else %> 
+        <ul class="nav nav-pills"> 
+          <li role="presentation" ><%= link_to "Log In", new_user_session_path ,class: "btn btn-blood" %></a></li> 
+          <li role="presentation"><%= link_to "Register", new_user_registration_path %></a></li> 
+        </ul> 
+      <% end %>
+    </nav>
+  </div>
   </header>
 
-  <section class="container">
-    <%= yield %>
+  <section id="main">
+  <%= yield %>
   </section>
-
-
+    
+  <footer>
+    <div class="container footer">
+      <div class="logo-icon">
+        <p id="logo-icon"> BLOOD BOWL MANAGER APP </p>
+      </div>
+      <div class="icons">
+      <a href="https://twitter.com/rramonfraga" class="twitter-follow-button" data-show-count="false">Follow @rramonfraga</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <a class="github-button" href="https://github.com/rramonfraga" aria-label="Follow @rramonfraga on GitHub">Follow @rramonfraga</a>
+      <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+      </div>
+  </div>
+  </footer>
 </body>
 </html>

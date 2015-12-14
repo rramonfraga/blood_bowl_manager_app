@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   post '/societies/:society_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
 
   resources :user_teams, only: [:index, :show, :new, :create,:update, :destroy] do
-    resources :user_players, only: [:index, :new, :create, :update, :destroy]
+    resources :user_players, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
   get '/api/skills' => 'skills#index'

@@ -7,7 +7,7 @@ class Match < ActiveRecord::Base
 
   def finished!
     self.finished = true
-    self.assign_experience_from_feats!
+    self.assign_experience_from_feats
     self.save
   end
 
@@ -33,9 +33,9 @@ class Match < ActiveRecord::Base
     end
   end
 
-  def assign_experience_from_feats!
+  def assign_experience_from_feats
     self.feats.each do |feat|
-      feat.assign_experience!
+      feat.assign_experience
     end
   end
 

@@ -14,7 +14,7 @@ class Feat < ActiveRecord::Base
     end
   end
 
-  def assign_experience!
+  def assign_experience
     player = self.user_player
     case self.kind
     when "injury" 
