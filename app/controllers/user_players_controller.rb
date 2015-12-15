@@ -26,6 +26,8 @@ class UserPlayersController < ApplicationController
 
   def edit
     @player = UserPlayer.find_by(id: params[:id])
+    @skills = @player.search_normal_skills
+    @skills_double = @player.search_double_skills
   end
 
   def update

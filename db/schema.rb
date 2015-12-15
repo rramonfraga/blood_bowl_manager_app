@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   create_table "championships", force: :cascade do |t|
     t.string   "name"
     t.integer  "society_id"
-    t.string   "kind",       default: "League"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "start",      default: false
+    t.string   "kind",          default: "League"
+    t.integer  "init_treasury", default: 1000000
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "start",         default: false
   end
 
   add_index "championships", ["society_id"], name: "index_championships_on_society_id"

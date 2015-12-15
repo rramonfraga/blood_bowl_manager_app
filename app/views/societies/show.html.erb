@@ -1,8 +1,6 @@
 <section class="container">
 <h1><%= @society.name %></h1>
 
-
-
 <ul class="list-unstyled">
   <% @championships.each do |championship| %>
     <li data-bbq="<%= championship.id %>">
@@ -14,6 +12,10 @@
     </li>
   <% end %>
 </ul>
+
+<a class="btn btn-blood" href="<%= new_society_championship_path(society_id: params[:id]) %>">
+  Create a Championship
+</a>
 </section>
 
 

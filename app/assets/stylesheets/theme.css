@@ -59,7 +59,16 @@
 .row-main-create .ma.st.ag.av{
   padding: 9px;
 }
-
+.row .btn-row{
+  background-color: #8c0000;
+  color:#ecf0f1;
+  padding: 7px 12px;
+  margin-right: 0;
+}
+.row .btn-row:hover{
+  background-color: #004377;
+  color:#ecf0f1;
+}
 
 .validate .btn{
   font-size: 20px;

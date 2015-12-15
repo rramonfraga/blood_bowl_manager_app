@@ -48,4 +48,40 @@ class UserPlayer < ActiveRecord::Base
     end
   end
 
+  def search_normal_skills
+    skills = []
+    normal_skill_letters = Player.find_by(id: self.template_player_id).normal.split
+    normal_skill_letters.each do |letter|
+      skills << Skill.return_skill_with(return_name_skill_from_letter(letter))
+    end
+    skills
+  end
+
+  def search_double_skills
+    skills = []
+    normal_skill_letters = Player.find_by(id: self.template_player_id).double.split("")
+    normal_skill_letters.each do |letter|
+      skills << Skill.return_skill_with(return_name_skill_from_letter(letter))
+    end
+    skills
+  end
+
+  private
+  def return_name_skill_from_letter(letter)
+    if letter == 'G'
+      "General"
+    elsif letter == 'P'
+      "Passing"
+    elsif letter == 'A'
+      "Agility"
+    elsif letter == 'S'
+      "Strength"
+    elsif letter == 'E'
+      "Extraordinary"
+    elsif letter == 'M'
+      "Mutation"
+    end
+  end
+
+
 end

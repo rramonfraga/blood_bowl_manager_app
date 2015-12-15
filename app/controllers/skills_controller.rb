@@ -14,4 +14,12 @@ class SkillsController < ApplicationController
     end
   end
 
+  def show_by_category
+    skills = Skill.return_skill_with(params[:category])
+    if skills
+      render status: 200, json: skills
+    else
+      render status: 404, json: { errors: "skills not found" }
+    end
+  end
 end

@@ -1,4 +1,5 @@
 <section class="container">
+<h1> Edit Player </h1>
 <%= render '/layouts/grid_stats' %>
 
 
@@ -6,7 +7,20 @@
 
 <% if @player.level_up == true %>
 
-  <div class="js-level-up" value="<%= player.templete_player_id %>"></div>
+  <div class="js-level-up" value="<%= @player.template_player_id %>">
+    <% @skills.each do |skills_categorys| %>
+      <h2> <%= skills_categorys[0].category %> </h2>
+      <% skills_categorys.each do |skill| %>
+        <%= radio_button_tag(:skill, skill.id) %>
+        <a href='#' class='js-skill' data-skill="<%= skill.name %>">
+          <%= label_tag(:skill, skill.name ) %>
+        </a>
+      <% end %>
+    <% end %>
+  </div>
 
 <% end %>
+
+<%= render  partial: '/layouts/small_modal' %>
+
 </section>

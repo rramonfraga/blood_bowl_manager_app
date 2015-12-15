@@ -14,6 +14,17 @@ class Feat < ActiveRecord::Base
     end
   end
 
+  def dissociate_touchdonw
+    if self.kind == "touchdowns"
+      if self.user_player.user_team.id == self.match.host_team.id
+        self.match.host_result = self.match.host_result - 1
+      else
+        self.match.visit_result = self.match.visit_result - 1
+      end
+      self.match.save
+    end
+  end
+
   def assign_experience
     player = self.user_player
     case self.kind

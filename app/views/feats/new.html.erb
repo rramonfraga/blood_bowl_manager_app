@@ -2,34 +2,56 @@
 <h1>Validate Match</h1>
 <div class="row">
   <div class="col-sm-5">
-    <h2><%= @match.host_result %> <%= @match.host_team.user_name %></h2>
+    <h2><%= @match.host_result %> - <%= @match.host_team.user_name %></h2>
   </div>
   <div class="col-sm-2"><h2>VS</h2></div>
   <div class="col-sm-5">
-    <h2><%= @match.visit_result %> <%= @match.visit_team.user_name %></h2>
+    <h2><%= @match.visit_team.user_name %> - <%= @match.visit_result %></h2>
   </div>
 </div>
 
+
+
 <div class="container">
+  <div class="row row-header">
+    <div class="col-sm-3">
+      Team
+    </div>
+    <div class="col-sm-3">
+      Player 
+    </div>
+    <div class="col-sm-3">
+      Kind
+    </div>
+    <div class="col-sm-2">
+      Casuality
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
   <% @match.feats.each do | feat | %>
+  <div class="row row-main">
     <% if feat.user_player != nil%>
-      <% if feat.user_player.user_team_id == @match.host_team_id%>
-        <div class="row">      
-          <div class="col-sm-5">
-            <%= feat.user_player.user_name %> - <%= feat.kind %>
-          </div>
-          <div class="col-sm-2"> </div>
-      <% else %>
-          <div class="col-sm-5">     
-            <%= feat.user_player.user_name %> - <%= feat.kind %>
-          </div>
-        </div>
-      <% end %>
+      <div class="col-sm-3">
+        <%= feat.user_player.user_team.user_name %>
+      </div>
+      <div class="col-sm-3">
+        <%= feat.user_player.user_name %>
+      </div>
+      <div class="col-sm-3">
+        <%= feat.kind %>
+      </div>
+      <div class="col-sm-2">
+        <%= feat.kind_number %>
+      </div>
+      <div class="col-sm-1">
+        <%= link_to "Delete", "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}/matches/#{params[:match_id]}/feats/#{feat.id}", method: :delete, class: "btn-row" %>
+      </div>
     <% end %>
+  </div>
   <% end %>
 </div>
-<br>
-<br>
+
 
 
 <%= form_for @feat, url: society_championship_match_feats_path(society_id: params[:society_id], championship_id: params[:championship_id], match_id: params[:match_id]) do |form| %>

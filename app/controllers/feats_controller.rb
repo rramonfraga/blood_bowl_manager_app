@@ -15,7 +15,11 @@ class FeatsController < ApplicationController
     redirect_to action: 'new', controller: 'feats', society_id: params["society_id"], championship_id: params["championship_id"], match_id: params["match_id"]
   end
 
-  def update
+  def destroy
+    feat = Feat.find_by(id: params[:id])
+    feat.dissociate_touchdonw
+    feat.destroy
+    redirect_to action: 'new', controller: 'feats', society_id: params["society_id"], championship_id: params["championship_id"], match_id: params["match_id"]
   end
 
 end

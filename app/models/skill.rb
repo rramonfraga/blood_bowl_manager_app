@@ -7,4 +7,8 @@ class Skill < ActiveRecord::Base
             :description,
             presence: true
 
+  def self.return_skill_with(category)
+    where('category = ?',category).all
+  end
+
 end

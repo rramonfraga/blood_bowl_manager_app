@@ -26,7 +26,6 @@ class UserTeamsController < ApplicationController
 
   private
   def user_team_params
-    params.require(:user_team).permit(:user_name, :template_team_id)
-                                    
+    params.require(:user_team).permit(:user_name, :template_team_id)                                
   end
 end
