@@ -3,9 +3,8 @@ header{
 }
 
 nav{
-  width: 58%;
   margin:auto;
-  margin-top: -8px;
+  margin-top: -4px;
 }
 
 .logo{
@@ -18,9 +17,13 @@ nav{
   color: #ecf0f1;
   font-size: 16px;
   border-radius: 0;
-  padding: 6px 15px;
+  padding: 6px 25px;
 }
 .nav-pills>li>a:hover{
   background-color: #8c0000;
   border-radius: 0px;
+}
+
+.nav-pills li:last-child{
+  float: right;
 }

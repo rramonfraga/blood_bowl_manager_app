@@ -1,10 +1,6 @@
 <section class="container">
 <h1>Blood Bowl Societies</h1>
 
-<a href="<%= new_society_path %>" class="btn btn-blood">
-  Add a new Society
-</a>
-
 <ul class="list-unstyled">
   <% @societies.each do |society| %>
     <li data-bbq="<%= society.id %>">

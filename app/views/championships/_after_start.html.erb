@@ -15,17 +15,12 @@
           <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
           <%= match.host_result.to_s + " - "+ match.host_team.user_name %> VS <%= match.visit_team.user_name + " - " +  match.visit_result.to_s%></a>
         <% else %>
-          <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
-          <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %></a>
-        <% end %>
-        
-
-        <% current_user.user_teams.each do |team|%>
-          <% if team.id == match.host_team.id || team.id == match.visit_team.id %>
-            <% if match.finished == false %>
-              <a href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>" class="btn btn-blood" id="star-championship">
-              Validate Result </a>
-            <% end %>
+          <% if current_user.id == match.host_team.user_id || current_user.id == match.visit_team.user_id %>
+            <a class="match btn btn-blood" href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>">
+            <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %></a>
+          <% else %>
+            <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+            <%= match.host_team.user_name  %> VS <%= match.visit_team.user_name  %></a>
           <% end %>
         <% end %></li>
 
@@ -36,7 +31,7 @@
 </section>
 <section class="col-sm-8">
   <h3>
-  <div class="row">
+  <div class="row row-header">
     <div class="col-sm-3">
       Position
     </div>
@@ -53,7 +48,7 @@
   </h3>
 
   <% @clasification.each_with_index do |team, index| %>
-    <div class="row">
+    <div class="row row-main">
       <div class="col-sm-3">
         <%= index + 1 %>º
       </div>

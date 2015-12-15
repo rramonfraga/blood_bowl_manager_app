@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container validate">
 <h1>Validate Match</h1>
 <div class="row">
   <div class="col-sm-5">
@@ -66,11 +66,13 @@
     <%= form.number_field :kind_number, class: 'form-control' %>
   </div>
   
+  <div class="buttoms-validate">
   <div class="form-group">
-    <%= submit_tag "Validate", class: "btn btn-success"  %>
+    <%= submit_tag "Validate", class: "btn btn-blood"  %>
   </div>
 <% end %>
 
 <%= button_to "Finish", {:controller => "matches", :action => "finished", :society_id => params["society_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-blood"  %>
+</div>
 
 </section>

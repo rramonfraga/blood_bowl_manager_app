@@ -18,14 +18,17 @@
           <li><a href="<%= societies_path %>">
             Societies
           </a></li>
+          <li><a href="<%= new_society_path %>">
+          Create Society
+          </a></li>
           <li><a href="<%= user_teams_path %>">
             Show Teams
           </a></li>
           <li><a href="<%= new_user_team_path %>">
-            Create a new Team
+            Create Team
           </a></li>
-
-          <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blood" %></li>
+    
+          <li id="login"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blood" %></li>
         </ul> 
       <% else %> 
         <ul class="nav nav-pills"> 

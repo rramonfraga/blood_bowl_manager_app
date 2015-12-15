@@ -3,7 +3,7 @@
   <% @players.each_with_index do |player, index| %>
    <%= fields_for 'players[]', player do |p| %>
 
-    <div class="row">
+    <div class="row row-main row-main-create">
       <div class="field col-sm-1 number">
         <%= index + 1 %>
       </div>

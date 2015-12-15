@@ -3,15 +3,67 @@
   src: url(/assets/Blood-Blocks.ttf) format("truetype");
 }
 
-.championship .match{
-  color: #8c0000;
-  font-size: 16px;
-}
-
 .btn-blood{
   color: #ecf0f1;
   background-color: #8c0000;
   border-color: #3c0000;
-
 }
+
+
+.championship .match{
+  color: #8c0000;
+  font-size: 16px;
+  padding: 6px 15px;
+}
+.championship .match.btn{
+  color: #ecf0f1;
+  font-size: 16px;
+}
+.championship .match.btn:hover{
+  background-color: #004377;
+}
+
+
+#main{
+  background-color:#ecf0f1;
+  height: 100%;
+  overflow:auto;
+  min-height: 83vh;
+  padding-bottom: 20px;
+}
+
+
+.row a{
+  color: #8c0000;
+}
+.row-header{
+  background-color: #8c0000;
+  color:#ecf0f1;
+  font-size: ;
+  padding: 5px;
+}
+.row-header-create{
+  font-size: 18px;
+  padding: 7px;
+}
+.row-main{
+  font-size: 16px ;
+  padding: 5px;
+}
+.row-main:nth-of-type(even){
+  background-color: #ddd;
+}
+.row-main:nth-of-type(odd){
+  background-color: #eee;
+}
+.row-main-create .ma.st.ag.av{
+  padding: 9px;
+}
+
+
+.validate .btn{
+  font-size: 20px;
+}
+
+
 
