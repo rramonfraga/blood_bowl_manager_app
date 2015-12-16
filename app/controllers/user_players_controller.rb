@@ -32,9 +32,17 @@ class UserPlayersController < ApplicationController
 
   def update
     @player = UserPlayer.find_by(id: params[:id])
+    if @player.update_player params
+      redirect_to action: 'edit', controller: 'user_players', id: @player.id
+    else
+      render 'edit'
+    end
   end
 
   def destoy
+    player = UserPlayer.find_by(id: params[:id])
+    player.destroy
+    redirect_to action: 'show', controller: 'user_teams', user_team_id: params["user_team_id"]
   end
 
   private

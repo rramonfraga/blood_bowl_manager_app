@@ -6,7 +6,7 @@
 <%= render partial: "/layouts/player", locals: { player: @player } %>
 </div>
 
-<%= form_for edit_user_team_user_player_path(user_team_id: params["user_team_id"], id: params["id"] ) do |form| %>
+<%= form_for @player, {url: user_team_user_player_path(user_team_id: params["user_team_id"], id: params["id"] )} do |form| %>
   
   <div class="form-group">
     <%= form.label :dorsal_number %>
@@ -29,7 +29,7 @@
         <div class="col-sm-3">
         <div class="input-group">
         <span class="input-group-addon">
-          <%= radio_button_tag(:skill, skill.id) %>
+          <%= radio_button_tag(:skill, skill.name) %>
         </span>
         <a href='#' class='js-skill' data-skill="<%= skill.name %>">
             <%= label_tag(:skill, skill.name, class: "form-control" ) %>

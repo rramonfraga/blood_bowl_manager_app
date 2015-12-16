@@ -66,6 +66,21 @@ class UserPlayer < ActiveRecord::Base
     skills
   end
 
+  def update_player(params)
+    if params["user_player"]["dorsal_number"] != ""
+      self.dorsal_number = params["user_player"]["dorsal_number"]
+    end
+    if params["user_player"]["user_name"] != ""
+      self.user_name = params["user_player"]["user_name"]
+    end
+    if params["skill"] != "" && self.level_up == true
+      self.level_up = false
+      self.list_skills << params["skill"]
+    end
+    binding.pry
+    self.save
+  end
+
   private
   def return_name_skill_from_letter(letter)
     if letter == 'G'
