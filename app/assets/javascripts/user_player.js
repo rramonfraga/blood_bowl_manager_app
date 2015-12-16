@@ -5,14 +5,18 @@
     var $select = $(event.currentTarget);
     var playerId = $select.val();
     var request = $.get('/api/players/' + playerId);
+    
     request.fail(function () {
+      alert("Couldn’t find this player. Try later.")
     });
 
     request.done(function (player) {
       var htmlSkill = ""
+
       player.list_skills.forEach( function (skill) {
         htmlSkill = htmlSkill + '<a href="#" class="js-skill" data-skill="' + skill + '">' +skill + "</a>, "
       });
+
       var htmlParts = [
         '<div class=" col-sm-2 ">',
         '  <div class="row">',
@@ -35,9 +39,11 @@
   
   function calculate_treasury() {
     var treasury = $('.js-treasury').data("treasury");
+
     $('.js-cost').each( function () {
       treasury = treasury - this.dataset.cost;
     });
+
     return treasury;
   }
 
@@ -46,16 +52,20 @@
       var $select = $(event.currentTarget);
       var skillName = $select.data("skill");
       var request = $.get('/api/skills/');
+
       request.fail(function () {
+        alert("Couldn’t find the skills. Try later.")
       });
 
       request.done(function (skills) {
         var skillDescription
+
         skills.forEach( function (skill) {
           if (skill.name === skillName){
             skillDescription = skill.description;
           }
         });
+
         $(".modal-title").html($("<p>"+ skillName +"</p>"));
         $(".modal-body").html($('<p><i>"'+ skillDescription +'"<i></p>'));
         $("#smallModal").modal("show");

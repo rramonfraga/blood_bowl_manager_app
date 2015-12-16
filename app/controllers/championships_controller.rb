@@ -1,4 +1,5 @@
 class ChampionshipsController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @society = Society.find_by(id: params[:society_id])

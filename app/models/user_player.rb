@@ -23,17 +23,17 @@ class UserPlayer < ActiveRecord::Base
   end
 
   def new_level
-    if self.experience >= 6 && self.experience <= 15
+    if self.experience.between?(6, 15)
       self.next_level_up("Experienced")
-    elsif self.experience >= 15 && self.experience <= 30
+    elsif self.experience.between?(16, 30)
       self.next_level_up("Veteran")
-    elsif self.experience >= 31 && self.experience <= 50
+    elsif self.experience.between?(31, 50)
       self.next_level_up("Emerging Star")
-    elsif self.experience >= 51 && self.experience <= 75
+    elsif self.experience.between?(51, 75)
       self.next_level_up("Star Player")
-    elsif self.experience >= 76 && self.experience <= 125
+    elsif self.experience.between?(76, 125)
       self.next_level_up("Super-Star")
-    elsif self.experience >= 126 && self.experience <= 175
+    elsif self.experience.between?(126, 175)
       self.next_level_up("Mega-Star")
     elsif self.experience >= 176
       self.next_level_up("Legend")
@@ -77,26 +77,15 @@ class UserPlayer < ActiveRecord::Base
       self.level_up = false
       self.list_skills << params["skill"]
     end
-    binding.pry
     self.save
   end
 
   private
   def return_name_skill_from_letter(letter)
-    if letter == 'G'
-      "General"
-    elsif letter == 'P'
-      "Passing"
-    elsif letter == 'A'
-      "Agility"
-    elsif letter == 'S'
-      "Strength"
-    elsif letter == 'E'
-      "Extraordinary"
-    elsif letter == 'M'
-      "Mutation"
-    end
+    skill_names = { "G" => "General", "P" => "Passing", "A" => "Agility", "S" => "Strength", "E" => "Extraordinary", "M" => "Mutation", }
+    skill_names[letter]
   end
+
 
 
 end

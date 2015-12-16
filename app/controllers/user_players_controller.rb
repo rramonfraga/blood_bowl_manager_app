@@ -1,4 +1,6 @@
 class UserPlayersController < ApplicationController
+  before_action :authenticate_user!
+
 
   def new
     @user_team = UserTeam.find_by(id: params[:user_team_id])

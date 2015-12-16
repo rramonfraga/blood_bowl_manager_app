@@ -3,43 +3,20 @@ class Feat < ActiveRecord::Base
   belongs_to :match
 
 
-  def assign_touchdonw
+  def assign_touchdown(number)
     if self.kind == "touchdowns"
       if self.user_player.user_team.id == self.match.host_team.id
-        self.match.host_result = self.match.host_result + 1
+        self.match.host_result = self.match.host_result + number
       else
-        self.match.visit_result = self.match.visit_result + 1
-      end
-      self.match.save
-    end
-  end
-
-  def dissociate_touchdonw
-    if self.kind == "touchdowns"
-      if self.user_player.user_team.id == self.match.host_team.id
-        self.match.host_result = self.match.host_result - 1
-      else
-        self.match.visit_result = self.match.visit_result - 1
+        self.match.visit_result = self.match.visit_result + number
       end
       self.match.save
     end
   end
 
   def assign_experience
-    player = self.user_player
-    case self.kind
-    when "injury" 
-      player.add_experience!(2)
-    when "complentions" 
-      player.add_experience!(1)
-    when "touchdowns" 
-      player.add_experience!(3)
-    when "interceptions" 
-      player.add_experience!(2)
-    when "mpv" 
-      player.add_experience!(5)
-    end
+    experience_points = {"injury" => 2, "complentions" => 1, "touchdowns" => 3, "interceptions" => 2, "mpv" => 5}
+    self.user_player.add_experience!(experience_points[self.kind])
   end
-
 
 end

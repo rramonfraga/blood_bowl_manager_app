@@ -89,12 +89,19 @@
   </div>
   
   <div class="buttoms-validate">
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-6">
   <div class="form-group">
     <%= submit_tag "Validate", class: "btn btn-blood"  %>
   </div>
+  </div>
 <% end %>
 
+<div class="col-sm-2">
 <%= button_to "Finish", {:controller => "matches", :action => "finished", :society_id => params["society_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-blood"  %>
+</div>
+</div>
 </div>
 
 </section>

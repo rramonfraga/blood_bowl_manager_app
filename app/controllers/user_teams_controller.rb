@@ -1,4 +1,6 @@
 class UserTeamsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @user_teams = current_user.user_teams.all
   end
@@ -19,9 +21,6 @@ class UserTeamsController < ApplicationController
     else
       render(:new)
     end
-  end
-
-  def update
   end
 
   private

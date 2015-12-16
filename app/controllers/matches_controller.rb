@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+  before_action :authenticate_user!
 
   def show
     @match = Match.find_by(id: params[:id])
