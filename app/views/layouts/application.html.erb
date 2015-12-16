@@ -3,7 +3,7 @@
 <head>
   <title>BloodBowlManagerApp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body data-hook="controller-<%= controller_name %> action-<%= action_name %>">
@@ -45,17 +45,9 @@
   </section>
 
   <footer>
-    <div class="container footer">
-      <div class="logo-icon">
-        <img src='<%= asset_path("logo2.png")%>' alt="logo" height="55px">
-      </div>
-      <div class="icons">
-      <a href="https://twitter.com/rramonfraga" class="twitter-follow-button" data-show-count="false">Follow @rramonfraga</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-      <a class="github-button" href="https://github.com/rramonfraga" aria-label="Follow @rramonfraga on GitHub">Follow @rramonfraga</a>
-      <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-      </div>
-  </div>
+
+  <%= render partial: "/layouts/footer" %>
+
   </footer>
 </body>
 </html>

@@ -8,6 +8,26 @@
   background-color: #8c0000;
   border-color: #3c0000;
 }
+.btn-edit-player{
+  margin-top: 15px;
+}
+.btn-edit-player a{
+  color:#ecf0f1;
+  font-size: 18px;
+}
+.btn-edit-player .btn-blood{
+  color:#ecf0f1;
+  font-size: 18px;
+}
+
+.input-group label:hover{
+  color:#8c0000;
+}
+.input-group label{
+  color:#004377;
+  cursor: pointer;
+  cursor: hand;
+}
 
 
 .championship .match{
@@ -69,6 +89,8 @@
   background-color: #004377;
   color:#ecf0f1;
 }
+
+
 
 .validate .btn{
   font-size: 20px;
