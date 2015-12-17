@@ -2,9 +2,12 @@ class MatchesController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @match = Match.find_by(id: params[:id])
-    @host_team = @match.host_team
-    @visit_team = @match.visit_team
+    if @match = Match.find_by(id: params[:id])
+      @host_team = @match.host_team
+      @visit_team = @match.visit_team
+    else
+      render status: 404, file: '/public/404.html'
+    end
   end
 
   def finished

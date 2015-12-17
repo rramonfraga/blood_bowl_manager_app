@@ -27,9 +27,16 @@ class UserPlayersController < ApplicationController
   end
 
   def edit
-    @player = UserPlayer.find_by(id: params[:id])
-    @skills = @player.search_normal_skills
-    @skills_double = @player.search_double_skills
+    if @team = UserTeam.find_by(id: params[:user_team_id])
+      if @team.user_id == current_user.id && @player = @team.user_players.find_by(id: params[:id])
+        @skills = @player.search_normal_skills
+        @skills_double = @player.search_double_skills
+      else
+        redirect_to action: 'show', controller: 'user_teams', id: params["user_team_id"]
+      end
+    else
+      redirect_to action: 'show', controller: 'user_teams', id: params["user_team_id"]
+    end
   end
 
   def update
@@ -41,7 +48,7 @@ class UserPlayersController < ApplicationController
     end
   end
 
-  def destoy
+  def destroy
     player = UserPlayer.find_by(id: params[:id])
     player.destroy
     redirect_to action: 'show', controller: 'user_teams', user_team_id: params["user_team_id"]

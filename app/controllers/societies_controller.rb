@@ -9,7 +9,7 @@ class SocietiesController < ApplicationController
     if @society = Society.find_by(id: params[:id])
       @championships = @society.championships
     else
-      render_404(params)
+      render status: 404, file: '/public/404.html'
     end
   end
 

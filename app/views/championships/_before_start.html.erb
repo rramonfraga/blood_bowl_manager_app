@@ -2,7 +2,9 @@
   <% @championship.user_teams.each do |team| %>
     <li data-team="<%= team.id %>">
       <h2>
+          <a class="team" href="<%= user_team_path(id: team.id) %>">
           <%= team.user_name  %>
+        </a>
       </h2>
     </li>
   <% end %>

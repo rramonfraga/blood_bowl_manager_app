@@ -13,13 +13,17 @@ class Match < ActiveRecord::Base
 
   def winner_id
     if self.finished == true
-      if self.host_result < self.visit_result
-        self.visit_team_id
-      elsif self.host_result > self.visit_result
-        self.host_team_id
-      else
-        0
-      end
+      self.return_winner_result
+    end
+  end
+
+  def return_winner_result
+    if self.host_result < self.visit_result
+      self.visit_team_id
+    elsif self.host_result > self.visit_result
+      self.host_team_id
+    else
+      0
     end
   end
 

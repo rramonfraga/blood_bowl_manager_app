@@ -103,10 +103,12 @@ create_skills
 create_teams
 create_players
 
-create_users
-create_societies
-create_championships
-create_user_team_and_players
+=begin
+  create_users
+  create_societies
+  create_championships
+  create_user_team_and_players
+=end
 
 
 

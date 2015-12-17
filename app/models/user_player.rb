@@ -3,6 +3,9 @@ class UserPlayer < ActiveRecord::Base
   has_many :feats
   serialize :list_skills, Array
 
+  validates :user_name, :dorsal_number, presence: true
+  validates :dorsal_number, numericality: {only_integer: true}
+
 
   def assign_stats_from_the_template
     template_player = Player.find_by(id: self.template_player_id)

@@ -16,8 +16,11 @@ class ChampionshipsController < ApplicationController
   end
 
   def show
-    @championship = Championship.find_by(id: params[:id])
-    @clasification = @championship.clasification
+    if @championship = Championship.find_by(id: params[:id])
+      @clasification = @championship.clasification
+    else
+      render status: 404, file: '/public/404.html'
+    end
   end
 
   def join
@@ -26,7 +29,7 @@ class ChampionshipsController < ApplicationController
       championship.user_teams << current_user.user_teams.find_by(id: params[:team_id])
       redirect_to action: 'show', controller: 'championships', society_id: championship.id, id: championship.id
     else
-      render status: 404, html: 404
+      render status: 404, file: '/public/404.html'
     end
   end
 

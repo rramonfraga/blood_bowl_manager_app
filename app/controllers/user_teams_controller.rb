@@ -6,8 +6,11 @@ class UserTeamsController < ApplicationController
   end
 
   def show
-    @user_team = current_user.user_teams.find_by(id: params[:id])
-    @user_players = @user_team.user_players
+    if @user_team = UserTeam.find_by(id: params[:id])
+      @user_players = @user_team.user_players
+    else
+      render status: 404, file: '/public/404.html'
+    end
   end
 
   def new
