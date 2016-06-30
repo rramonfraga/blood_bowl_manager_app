@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe UserPlayersController, type: :controller do
+RSpec.describe PlayersController, type: :controller do
 
 end

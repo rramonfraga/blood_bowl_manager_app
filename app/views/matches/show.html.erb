@@ -1,11 +1,11 @@
 <section class="container">
-<h1><%= @host_team.user_name %> VS <%= @visit_team.user_name %></h1>
+<h1><%= @host_team.name %> VS <%= @visit_team.name %></h1>
 
 <h2><%= @host_team.treasury %> VS <%= @visit_team.treasury %></h2>
 
 <%= render '/layouts/grid_stats' %>
 
-<% @host_team.user_players.each do |player| %>
+<% @host_team.players.each do |player| %>
   
   <%= render partial: "/layouts/player", locals: { player: player } %>
 
@@ -15,7 +15,7 @@
 
 <%= render '/layouts/grid_stats' %>
 
-<% @visit_team.user_players.each do |player| %>
+<% @visit_team.players.each do |player| %>
 
 
   <%= render partial: "/layouts/player", locals: { player: player } %>

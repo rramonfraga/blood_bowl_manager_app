@@ -17,19 +17,17 @@ Rails.application.routes.draw do
 
   post '/societies/:society_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
 
-  resources :user_teams, only: [:index, :show, :new, :create] do
-    resources :user_players, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :teams, only: [:index, :show, :new, :create] do
+    resources :players, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
-  get '/api/skills' => 'skills#index'
-  get '/api/skills/:id' => 'skills#show'
-  get '/api/skills/categories/:category' => 'skills#show_by_category'
 
-  get '/api/teams' => 'teams#index'
-  get '/api/teams/:id' => 'teams#show'
-  get '/api/teams/:id/players' => 'teams#show_players'
-
-  get '/api/players' => 'players#index'
-  get '/api/players/:id' => 'players#show'
+  namespace :api, defaults: {format: 'json'} do
+    namespace :templates do
+      resources :players, only: [:index, :show]
+      resources :teams, only: [:index, :show]
+      resources :skills, only: [:index, :show]
+    end
+  end
 
 end

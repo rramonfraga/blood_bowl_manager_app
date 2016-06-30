@@ -1,0 +1,32 @@
+<%= form_tag team_players_path(params[:team_id]) do %>
+  
+  <% @players.each_with_index do |player, index| %>
+   <%= fields_for 'players[]', player do |p| %>
+
+    <div class="row row-main row-main-create">
+      <div class="field col-sm-1 number">
+        <%= index + 1 %>
+      </div>
+      <div class="field col-sm-1 dorsal">
+        <%= p.text_field :dorsal_number, :class => "form-control" %>
+      </div>
+      <div class="field col-sm-2 name">
+        <%= p.text_field :name, :class => "form-control"  %>
+      </div>
+
+      <div class="field col-sm-2 js-player">
+        <%= p.collection_select(:templates_player_id, Templates::Team.find_by(id: params['team_id']).players, :id, :title, {:include_blank => ""}, {:class => "player_selection form-control js-player"} ) %>
+      </div>
+      
+      <div class='js-stats-cointainer'></div>
+      
+    </div>
+
+    <% end %>
+  <% end %>
+
+  <div class="actions">
+    <%= submit_tag "Create Team" , :class => "btn btn-blood"%>
+  </div>
+
+<% end %>

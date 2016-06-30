@@ -13,40 +13,30 @@
 
 ActiveRecord::Schema.define(version: 20151210173534) do
 
-  create_table "abilities", force: :cascade do |t|
-    t.integer  "player_id"
-    t.integer  "skill_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "abilities", ["player_id"], name: "index_abilities_on_player_id"
-  add_index "abilities", ["skill_id"], name: "index_abilities_on_skill_id"
-
   create_table "championships", force: :cascade do |t|
     t.string   "name"
     t.integer  "society_id"
     t.string   "kind",          default: "League"
     t.integer  "init_treasury", default: 1000000
+    t.boolean  "start",         default: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.boolean  "start",         default: false
   end
 
   add_index "championships", ["society_id"], name: "index_championships_on_society_id"
 
   create_table "feats", force: :cascade do |t|
     t.integer  "match_id"
-    t.integer  "user_player_id"
+    t.integer  "player_id"
     t.string   "kind"
     t.integer  "kind_number"
-    t.boolean  "host_team",      default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "host_team",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "feats", ["match_id"], name: "index_feats_on_match_id"
-  add_index "feats", ["user_player_id"], name: "index_feats_on_user_player_id"
+  add_index "feats", ["player_id"], name: "index_feats_on_player_id"
 
   create_table "matches", force: :cascade do |t|
     t.integer  "season_id"
@@ -72,6 +62,81 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   add_index "participations", ["user_id"], name: "index_participations_on_user_id"
 
   create_table "players", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "title"
+    t.string   "name"
+    t.integer  "templates_player_id"
+    t.integer  "dorsal_number"
+    t.integer  "value"
+    t.integer  "experience",          default: 0
+    t.string   "level",               default: "Rookie"
+    t.string   "list_skills"
+    t.boolean  "level_up",            default: false
+    t.integer  "mvp"
+    t.integer  "ma"
+    t.integer  "st"
+    t.integer  "ag"
+    t.integer  "av"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "players", ["team_id"], name: "index_players_on_team_id"
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "championship_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "registrations", ["championship_id"], name: "index_registrations_on_championship_id"
+  add_index "registrations", ["team_id"], name: "index_registrations_on_team_id"
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer  "championship_id"
+    t.integer  "round"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "seasons", ["championship_id"], name: "index_seasons_on_championship_id"
+
+  create_table "societies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "templates_team_id"
+    t.integer  "treasury",          default: 1000000
+    t.integer  "value",             default: 0
+    t.integer  "re_rolls",          default: 0
+    t.integer  "fan_factor",        default: 0
+    t.integer  "assistant_coaches", default: 0
+    t.integer  "cheerleaders",      default: 0
+    t.integer  "apothecaries",      default: 0
+    t.integer  "halfling_chef",     default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
+
+  create_table "templates_ability", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "templates_ability", ["player_id"], name: "index_templates_ability_on_player_id"
+  add_index "templates_ability", ["skill_id"], name: "index_templates_ability_on_skill_id"
+
+  create_table "templates_player", force: :cascade do |t|
     t.integer  "quantity"
     t.string   "title"
     t.integer  "team_id"
@@ -83,33 +148,13 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.string   "normal"
     t.string   "double"
     t.boolean  "feeder"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "list_skills"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "players", ["team_id"], name: "index_players_on_team_id"
+  add_index "templates_player", ["team_id"], name: "index_templates_player_on_team_id"
 
-  create_table "registrations", force: :cascade do |t|
-    t.integer  "user_team_id"
-    t.integer  "championship_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "registrations", ["championship_id"], name: "index_registrations_on_championship_id"
-  add_index "registrations", ["user_team_id"], name: "index_registrations_on_user_team_id"
-
-  create_table "seasons", force: :cascade do |t|
-    t.integer  "championship_id"
-    t.integer  "round"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "seasons", ["championship_id"], name: "index_seasons_on_championship_id"
-
-  create_table "skills", force: :cascade do |t|
+  create_table "templates_skill", force: :cascade do |t|
     t.string   "name"
     t.string   "category"
     t.text     "description"
@@ -117,13 +162,7 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "societies", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "teams", force: :cascade do |t|
+  create_table "templates_team", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "reroll_value"
@@ -133,46 +172,6 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
-
-  create_table "user_players", force: :cascade do |t|
-    t.integer  "user_team_id"
-    t.string   "user_name"
-    t.integer  "template_player_id"
-    t.integer  "dorsal_number"
-    t.integer  "player_value"
-    t.integer  "experience",         default: 0
-    t.string   "level",              default: "Rookie"
-    t.boolean  "level_up",           default: false
-    t.integer  "mvp"
-    t.integer  "ma"
-    t.integer  "st"
-    t.integer  "ag"
-    t.integer  "av"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "list_skills"
-    t.string   "title"
-  end
-
-  add_index "user_players", ["user_team_id"], name: "index_user_players_on_user_team_id"
-
-  create_table "user_teams", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "user_name"
-    t.integer  "template_team_id"
-    t.integer  "treasury",          default: 1000000
-    t.integer  "team_value",        default: 0
-    t.integer  "re_rolls",          default: 0
-    t.integer  "fan_factor",        default: 0
-    t.integer  "assistant_coaches", default: 0
-    t.integer  "cheerleaders",      default: 0
-    t.integer  "apothecaries",      default: 0
-    t.integer  "halfling_chef",     default: 0
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

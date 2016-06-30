@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :participations
   has_many :societies, through: :participations
 
-  has_many :user_teams
+  has_many :teams
 
   validates :name, presence: true
 end

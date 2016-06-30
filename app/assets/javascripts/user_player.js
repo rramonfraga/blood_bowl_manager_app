@@ -4,7 +4,7 @@
   $(document).on('change', '.js-player', function (event) {
     var $select = $(event.currentTarget);
     var playerId = $select.val();
-    var request = $.get('/api/players/' + playerId);
+    var request = $.get('/api/templates/players/' + playerId);
     
     request.fail(function () {
       alert("Couldn’t find this player. Try later.")
@@ -13,8 +13,8 @@
     request.done(function (player) {
       var htmlSkill = ""
 
-      player.list_skills.forEach( function (skill) {
-        htmlSkill = htmlSkill + '<a href="#" class="js-skill" data-skill="' + skill + '">' +skill + "</a>, "
+      player.skills.forEach( function (skill) {
+        htmlSkill = htmlSkill + '<a href="#" class="js-skill" data-skill="' + skill + '">' +skill.name + "</a>, "
       });
 
       var htmlParts = [
@@ -51,7 +51,7 @@
       var self = this;
       var $select = $(event.currentTarget);
       var skillName = $select.data("skill");
-      var request = $.get('/api/skills/');
+      var request = $.get('/api/templates/skills/');
 
       request.fail(function () {
         alert("Couldn’t find the skills. Try later.")

@@ -1,27 +1,33 @@
 class TeamsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    teams = Team.all
-    render status: 200, json: teams
+    @teams = current_user.teams.all
   end
 
   def show
-    team = Team.find_by id: params[:id]
-    if team
-      render status: 200, json: team
+    if @team = Team.find_by(id: params[:id])
+      @players = @team.players
     else
-      render status: 404, json: { errors: "team not found" }
+      render status: 404, file: '/public/404.html'
     end
   end
 
-  def show_players
-    team = Team.find_by id: params[:id]
-    if team
-      players = team.players
-      render status: 200, json: players
+  def new
+    @team = current_user.teams.new
+  end
+
+  def create
+    @team = current_user.teams.new team_params
+    if @team.save
+      redirect_to(new_team_player_path(@team))
     else
-      render status: 404, json: { errors: "players from the team not found" }
+      render(:new)
     end
   end
 
+  private
+  def team_params
+    params.require(:team).permit(:name, :template_team_id)                                
+  end
 end

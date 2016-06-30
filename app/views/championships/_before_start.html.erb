@@ -1,9 +1,9 @@
 <ul class="list-unstyled">
-  <% @championship.user_teams.each do |team| %>
+  <% @championship.teams.each do |team| %>
     <li data-team="<%= team.id %>">
       <h2>
-          <a class="team" href="<%= user_team_path(id: team.id) %>">
-          <%= team.user_name  %>
+          <a class="team" href="<%= team_path(id: team.id) %>">
+          <%= team.name  %>
         </a>
       </h2>
     </li>
@@ -11,8 +11,8 @@
 </ul>
 
 <% unless @championship.has_team_included_a_user?(current_user) %>
-  <% current_user.user_teams.each do |team| %>
-    <%= button_to "Join - #{team.user_name}", {:controller => "championships", :action => "join", :id => @championship.id, :society_id => @championship.society.id, :team_id => team.id }  , :method=>:post, class: "btn btn-blood"  %> <br>
+  <% current_user.teams.each do |team| %>
+    <%= button_to "Join - #{team.name}", {:controller => "championships", :action => "join", :id => @championship.id, :society_id => @championship.society.id, :team_id => team.id }  , :method=>:post, class: "btn btn-blood"  %> <br>
   <% end %>   
 <% end %>
 

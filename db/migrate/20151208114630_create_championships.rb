@@ -4,7 +4,8 @@ class CreateChampionships < ActiveRecord::Migration
       t.string :name
       t.references :society, index: true
       t.string :kind, default: "League"
-      t.integer :init_treasury, default: 1000000 
+      t.integer :init_treasury, default: 1000000
+      t.boolean :start, default: false
 
       t.timestamps null: false
     end

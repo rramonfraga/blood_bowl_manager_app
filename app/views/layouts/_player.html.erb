@@ -1,8 +1,8 @@
 <div class="row row-main">
   <div class="field col-sm-1"><%= player.dorsal_number  %></div>
   <div class="field col-sm-2 name">
-    <a href= "<%= edit_user_team_user_player_path(id: player.id, user_team_id: player.user_team_id) %>">
-      <%= player.user_name  %>
+    <a href= "<%= edit_team_player_path(id: player.id, team_id: player.team_id) %>">
+      <%= player.name  %>
     </a>
   </div>
   <div class="field col-sm-2 title"><%= player.title  %></div>
@@ -20,9 +20,9 @@
   </div>
   <div class="field col-sm-1 experience"> 
     <%=player.experience %>
-    <% if current_user.id == player.user_team.user_id %>
+    <% if current_user.id == player.team.user_id %>
       <% if player.level_up == true %>
-        <a href= "<%= edit_user_team_user_player_path(id: player.id, user_team_id: player.user_team_id) %>"><img src='<%= asset_path("level_up.png")%>' alt="level up icon"></a>
+        <a href= "<%= edit_team_player_path(id: player.id, team_id: player.team_id) %>"><img src='<%= asset_path("level_up.png")%>' alt="level up icon"></a>
       <% end %>
     <% end %>
   </div>

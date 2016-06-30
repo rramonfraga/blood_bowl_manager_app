@@ -1,0 +1,30 @@
+<section class="container">
+<h1> Create a new Team </h1>
+
+<%= form_for @team do |form| %>
+
+  <% if @team.errors.any? %>
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% @team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :team %><br>
+    <%= form.collection_select(:templates_team_id, Templates::Team.all, :id, :name, {}, {:class=>"form-control"}) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit (@team.new_record? ? 'Create Team' : 'Update Team'), :class => "btn btn-blood" %>
+  </div>
+
+<% end %>
+</section>

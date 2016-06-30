@@ -1,20 +1,20 @@
 class Championship < ActiveRecord::Base
   belongs_to :society
   has_many :registrations
-  has_many :user_teams, through: :registrations
+  has_many :teams, through: :registrations
   has_many :seasons
   has_many :matches, through: :seasons
 
   validates :name, :kind, presence: true
 
   def has_team_included?(team)
-    self.user_teams.reduce(false) do |included, championship_team|
+    self.teams.reduce(false) do |included, championship_team|
       included || championship_team.id == team.id
     end
   end
 
   def has_team_included_a_user?(user)
-    user.user_teams.reduce(false) do |included, team|
+    user.teams.reduce(false) do |included, team|
       included || self.has_team_included?(team)
     end
   end
@@ -35,7 +35,7 @@ class Championship < ActiveRecord::Base
   end
 
   def arrays_with_ids_team
-    self.user_teams.map do |team|
+    self.teams.map do |team|
       team.id
     end
   end
@@ -46,7 +46,7 @@ class Championship < ActiveRecord::Base
   end
 
   def clasification
-    self.user_teams.sort do |team1, team2|
+    self.teams.sort do |team1, team2|
       team2.calculate_points(self) <=> team1.calculate_points(self)
     end
   end

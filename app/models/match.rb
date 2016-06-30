@@ -1,8 +1,8 @@
 class Match < ActiveRecord::Base
   belongs_to :season
   has_one :championship, through: :seasons
-  belongs_to :host_team, :class_name => 'UserTeam', :foreign_key => 'host_team_id'
-  belongs_to :visit_team, :class_name => 'UserTeam', :foreign_key => 'visit_team_id'
+  belongs_to :host_team, :class_name => 'Team', :foreign_key => 'host_team_id'
+  belongs_to :visit_team, :class_name => 'Team', :foreign_key => 'visit_team_id'
   has_many :feats
 
   def finished!

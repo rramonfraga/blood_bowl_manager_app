@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'pry'
-gem 'rspec-rails'
 gem 'json'
 # Use Devise
 gem 'devise'
@@ -48,6 +46,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'launchy'
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 group :development do
