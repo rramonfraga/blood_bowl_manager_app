@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :participations
-  has_many :societies, through: :participations
+  has_many :communities, through: :participations
 
   has_many :teams
 

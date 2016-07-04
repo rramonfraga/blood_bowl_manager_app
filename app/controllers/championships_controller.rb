@@ -2,14 +2,14 @@ class ChampionshipsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @society = Society.find_by(id: params[:society_id])
-    @championship = @society.championships.new
+    @community = Community.find_by(id: params[:community_id])
+    @championship = @community.championships.new
   end
 
   def create
-    @championship = Society.find_by(id: params[:society_id]).championships.new championship_params
+    @championship = Community.find_by(id: params[:community_id]).championships.new championship_params
     if @championship.save
-      redirect_to(society_path(@championship.society_id))
+      redirect_to(community_path(@championship.community_id))
     else
       render(:new)
     end
@@ -27,7 +27,7 @@ class ChampionshipsController < ApplicationController
     championship = Championship.find_by(id: params[:id])
     if current_user && championship
       championship.teams << current_user.teams.find_by(id: params[:team_id])
-      redirect_to action: 'show', controller: 'championships', society_id: championship.id, id: championship.id
+      redirect_to action: 'show', controller: 'championships', community_id: championship.id, id: championship.id
     else
       render status: 404, file: '/public/404.html'
     end
@@ -38,7 +38,7 @@ class ChampionshipsController < ApplicationController
     if championship.start == false
       championship.start_seasons
     end      
-    redirect_to action: 'show', controller: 'championships', society_id: championship.society.id, id: championship.id
+    redirect_to action: 'show', controller: 'championships', community_id: championship.community.id, id: championship.id
   end
 
   private

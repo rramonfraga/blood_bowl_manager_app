@@ -45,7 +45,7 @@
         <%= feat.kind_number %>
       </div>
       <div class="col-sm-1">
-        <%= link_to "Delete", "/societies/#{params[:society_id]}/championships/#{params[:championship_id]}/matches/#{params[:match_id]}/feats/#{feat.id}", method: :delete, class: "btn-row" %>
+        <%= link_to "Delete", "/communities/#{params[:community_id]}/championships/#{params[:championship_id]}/matches/#{params[:match_id]}/feats/#{feat.id}", method: :delete, class: "btn-row" %>
       </div>
     <% end %>
   </div>
@@ -54,7 +54,7 @@
 
 
 
-<%= form_for @feat, url: society_championship_match_feats_path(society_id: params[:society_id], championship_id: params[:championship_id], match_id: params[:match_id]) do |form| %>
+<%= form_for @feat, url: community_championship_match_feats_path(community_id: params[:community_id], championship_id: params[:championship_id], match_id: params[:match_id]) do |form| %>
 
   <% if @feat.errors.any? %>
       <h2><%= pluralize(@feat.errors.count, "error") %> prohibited this team from being saved:</h2>
@@ -99,7 +99,7 @@
 <% end %>
 
 <div class="col-sm-2">
-<%= button_to "Finish", {:controller => "matches", :action => "finished", :society_id => params["society_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-blood"  %>
+<%= button_to "Finish", {:controller => "matches", :action => "finished", :community_id => params["community_id"], :championship_id => params["championship_id"], :id => params["match_id"]}  , :method=>:post, class: "btn btn-blood"  %>
 </div>
 </div>
 </div>

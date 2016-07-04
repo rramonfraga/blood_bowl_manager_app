@@ -123,17 +123,17 @@ def create_users
   end
 end
 
-def create_societies
-  society = Society.create name: "Society 1"
+def create_communities
+  community = Community.create name: "Community 1"
   4.times do | index |
     user = User.find_by(name: "User #{index +1}")
-    user.societies << society
+    user.communities << community
   end
 end
 
 def create_championships
-  society = Society.find_by(name: "Society 1")
-  society.championships.create name: "Championship", kind: "League"
+  community = Community.find_by(name: "Community 1")
+  community.championships.create name: "Championship", kind: "League"
 end
 
 def create_team_and_players
@@ -169,7 +169,7 @@ create_players
 =end
 =begin
   create_users
-  create_societies
+  create_communities
   create_championships
   create_team_and_players
 =end

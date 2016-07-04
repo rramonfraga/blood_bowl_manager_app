@@ -2,7 +2,7 @@ class CreateChampionships < ActiveRecord::Migration
   def change
     create_table :championships do |t|
       t.string :name
-      t.references :society, index: true
+      t.references :community, index: true
       t.string :kind, default: "League"
       t.integer :init_treasury, default: 1000000
       t.boolean :start, default: false

@@ -12,14 +12,14 @@
 
         <li data-match="<%= match.id %>">
         <% if match.finished == true %>
-          <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+          <a class="match" href="<%= community_championship_match_path(id: match.id, championship_id: @championship.id, community_id: @championship.community_id) %>">
           <%= match.host_result.to_s + " - "+ match.host_team.name %> VS <%= match.visit_team.name + " - " +  match.visit_result.to_s%></a>
         <% else %>
           <% if current_user.id == match.host_team.user_id || current_user.id == match.visit_team.user_id %>
-            <a class="match btn btn-blood" href="<%= new_society_championship_match_feat_path(society_id: params[:society_id],championship_id: params[:id], match_id: match.id )%>">
+            <a class="match btn btn-blood" href="<%= new_community_championship_match_feat_path(community_id: params[:community_id],championship_id: params[:id], match_id: match.id )%>">
             <%= match.host_team.name  %> VS <%= match.visit_team.name  %></a>
           <% else %>
-            <a class="match" href="<%= society_championship_match_path(id: match.id, championship_id: @championship.id, society_id: @championship.society_id) %>">
+            <a class="match" href="<%= community_championship_match_path(id: match.id, championship_id: @championship.id, community_id: @championship.community_id) %>">
             <%= match.host_team.name  %> VS <%= match.visit_team.name  %></a>
           <% end %>
         <% end %></li>

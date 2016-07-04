@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20151210173534) do
 
   create_table "championships", force: :cascade do |t|
     t.string   "name"
-    t.integer  "society_id"
+    t.integer  "community_id"
     t.string   "kind",          default: "League"
     t.integer  "init_treasury", default: 1000000
     t.boolean  "start",         default: false
@@ -23,7 +23,13 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.datetime "updated_at",                       null: false
   end
 
-  add_index "championships", ["society_id"], name: "index_championships_on_society_id"
+  add_index "championships", ["community_id"], name: "index_championships_on_community_id"
+
+  create_table "communities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "feats", force: :cascade do |t|
     t.integer  "match_id"
@@ -53,12 +59,12 @@ ActiveRecord::Schema.define(version: 20151210173534) do
 
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "society_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "community_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "participations", ["society_id"], name: "index_participations_on_society_id"
+  add_index "participations", ["community_id"], name: "index_participations_on_community_id"
   add_index "participations", ["user_id"], name: "index_participations_on_user_id"
 
   create_table "players", force: :cascade do |t|
@@ -101,12 +107,6 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   end
 
   add_index "seasons", ["championship_id"], name: "index_seasons_on_championship_id"
-
-  create_table "societies", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "teams", force: :cascade do |t|
     t.integer  "user_id"

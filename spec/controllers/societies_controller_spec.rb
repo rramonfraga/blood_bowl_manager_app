@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe SocietiesController, type: :controller do
+RSpec.describe CommunitiesController, type: :controller do
 
 end

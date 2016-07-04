@@ -1,5 +1,5 @@
 class Championship < ActiveRecord::Base
-  belongs_to :society
+  belongs_to :community
   has_many :registrations
   has_many :teams, through: :registrations
   has_many :seasons

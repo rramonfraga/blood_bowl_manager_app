@@ -1,4 +1,3 @@
-pry
 json.category @skill.category
 json.description @skill.description
 json.id @skill.id

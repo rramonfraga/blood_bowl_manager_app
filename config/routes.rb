@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'societies#index'
+  root 'communities#index'
 
   devise_for :users
 
-  resources :societies, only: [:index, :show, :new, :create] do
+  resources :communities, only: [:index, :show, :new, :create] do
     resources :championships, only: [:show, :new, :create] do
       resources :matches, only: [:show] do
         resources :feats, only: [:new, :create, :destroy]
@@ -12,10 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  post '/societies/:society_id/championships/:id/start' => 'championships#start'
-  post '/societies/:society_id/championships/:id/join' => 'championships#join'
-
-  post '/societies/:society_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
+  post '/communities/:community_id/championships/:id/start' => 'championships#start'
+  post '/communities/:community_id/championships/:id/join' => 'championships#join'
+  post '/communities/:community_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
 
   resources :teams, only: [:index, :show, :new, :create] do
     resources :players, only: [:index, :new, :create, :edit, :update, :destroy]

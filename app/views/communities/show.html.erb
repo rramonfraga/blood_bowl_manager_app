@@ -1,11 +1,11 @@
 <section class="container">
-<h1><%= @society.name %></h1>
+<h1><%= @community.name %></h1>
 
 <ul class="list-unstyled">
   <% @championships.each do |championship| %>
     <li data-bbq="<%= championship.id %>">
       <h2>
-        <a href="<%= society_championship_path(id:championship.id, society_id: @society.id) %>">
+        <a href="<%= community_championship_path(id:championship.id, community_id: @community.id) %>">
           <%= championship.name  + " " + championship.kind %>
         </a>
       </h2>
@@ -13,7 +13,7 @@
   <% end %>
 </ul>
 
-<a class="btn btn-blood" href="<%= new_society_championship_path(society_id: params[:id]) %>">
+<a class="btn btn-blood" href="<%= new_community_championship_path(community_id: params[:id]) %>">
   Create a Championship
 </a>
 </section>
