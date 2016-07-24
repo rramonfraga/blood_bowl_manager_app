@@ -7,7 +7,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :templates_player_id
       t.integer :dorsal_number
       t.integer :value
-      t.integer :experience, default: 0
+      t.integer :experience
       t.string  :level, default: "Rookie"
       t.string  :list_skills
       t.boolean :level_up, default: false

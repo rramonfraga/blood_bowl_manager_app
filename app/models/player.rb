@@ -15,31 +15,31 @@ class Player < ActiveRecord::Base
     self.st = template_player.st
     self.ag = template_player.ag
     self.av = template_player.av
-    self.list_skills = template_player.list_skills
-    self.save
+    self.skills = template_player.skills
+    save
   end
 
   def add_experience!(exp)
     self.experience = self.experience + exp
-    self.new_level
-    self.save
+    new_level
+    save
   end
 
   def new_level
-    if self.experience.between?(6, 15)
-      self.next_level_up("Experienced")
-    elsif self.experience.between?(16, 30)
-      self.next_level_up("Veteran")
-    elsif self.experience.between?(31, 50)
-      self.next_level_up("Emerging Star")
-    elsif self.experience.between?(51, 75)
-      self.next_level_up("Star Player")
-    elsif self.experience.between?(76, 125)
-      self.next_level_up("Super-Star")
-    elsif self.experience.between?(126, 175)
-      self.next_level_up("Mega-Star")
-    elsif self.experience >= 176
-      self.next_level_up("Legend")
+    if experience.between?(6, 15)
+      next_level_up("Experienced")
+    elsif experience.between?(16, 30)
+      next_level_up("Veteran")
+    elsif experience.between?(31, 50)
+      next_level_up("Emerging Star")
+    elsif experience.between?(51, 75)
+      next_level_up("Star Player")
+    elsif experience.between?(76, 125)
+      next_level_up("Super-Star")
+    elsif experience.between?(126, 175)
+      next_level_up("Mega-Star")
+    elsif experience >= 176
+      next_level_up("Legend")
     end
   end
 
@@ -80,7 +80,7 @@ class Player < ActiveRecord::Base
       self.level_up = false
       self.list_skills << params["skill"]
     end
-    self.save
+    save
   end
 
   private

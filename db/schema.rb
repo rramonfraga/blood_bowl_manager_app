@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -21,9 +20,8 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.boolean  "start",         default: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.index ["community_id"], name: "index_championships_on_community_id"
   end
-
-  add_index "championships", ["community_id"], name: "index_championships_on_community_id"
 
   create_table "communities", force: :cascade do |t|
     t.string   "name"
@@ -39,10 +37,9 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.boolean  "host_team",   default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["match_id"], name: "index_feats_on_match_id"
+    t.index ["player_id"], name: "index_feats_on_player_id"
   end
-
-  add_index "feats", ["match_id"], name: "index_feats_on_match_id"
-  add_index "feats", ["player_id"], name: "index_feats_on_player_id"
 
   create_table "matches", force: :cascade do |t|
     t.integer  "season_id"
@@ -53,19 +50,17 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "visit_result",  default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.index ["season_id"], name: "index_matches_on_season_id"
   end
-
-  add_index "matches", ["season_id"], name: "index_matches_on_season_id"
 
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "community_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["community_id"], name: "index_participations_on_community_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
   end
-
-  add_index "participations", ["community_id"], name: "index_participations_on_community_id"
-  add_index "participations", ["user_id"], name: "index_participations_on_user_id"
 
   create_table "players", force: :cascade do |t|
     t.integer  "team_id"
@@ -85,28 +80,25 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "av"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["team_id"], name: "index_players_on_team_id"
   end
-
-  add_index "players", ["team_id"], name: "index_players_on_team_id"
 
   create_table "registrations", force: :cascade do |t|
     t.integer  "team_id"
     t.integer  "championship_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["championship_id"], name: "index_registrations_on_championship_id"
+    t.index ["team_id"], name: "index_registrations_on_team_id"
   end
-
-  add_index "registrations", ["championship_id"], name: "index_registrations_on_championship_id"
-  add_index "registrations", ["team_id"], name: "index_registrations_on_team_id"
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "championship_id"
     t.integer  "round"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["championship_id"], name: "index_seasons_on_championship_id"
   end
-
-  add_index "seasons", ["championship_id"], name: "index_seasons_on_championship_id"
 
   create_table "teams", force: :cascade do |t|
     t.integer  "user_id"
@@ -122,19 +114,17 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "halfling_chef",     default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
-
-  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
 
   create_table "templates_ability", force: :cascade do |t|
     t.integer  "player_id"
     t.integer  "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_templates_ability_on_player_id"
+    t.index ["skill_id"], name: "index_templates_ability_on_skill_id"
   end
-
-  add_index "templates_ability", ["player_id"], name: "index_templates_ability_on_player_id"
-  add_index "templates_ability", ["skill_id"], name: "index_templates_ability_on_skill_id"
 
   create_table "templates_player", force: :cascade do |t|
     t.integer  "quantity"
@@ -150,9 +140,8 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.boolean  "feeder"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_templates_player_on_team_id"
   end
-
-  add_index "templates_player", ["team_id"], name: "index_templates_player_on_team_id"
 
   create_table "templates_skill", force: :cascade do |t|
     t.string   "name"
@@ -187,9 +176,8 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

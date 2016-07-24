@@ -1,4 +1,4 @@
-(function main () {
+/*(function main () {
   "use strict";
 
   $(document).on('change', '.js-player', function (event) {
@@ -74,4 +74,4 @@
     
     
 
-})();
+})();*/

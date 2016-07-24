@@ -1,0 +1,18 @@
+- @players.each_with_index do |player, index|
+  = fields_for 'players[]', player do |p|
+
+    .row.row-main.row-main-create
+      .col-sm-5
+        .row
+          .field.col-sm-1.number
+            = index + 1
+          .field.col-sm-2.dorsal
+            = p.text_field :dorsal_number, :class => "form-control"
+          .field.col-sm-4.name
+            = p.text_field :name, :class => "form-control"
+          .field.col-sm-5.js-player
+            = p.collection_select(:templates_player_id, Templates::Team.find_by(id: .players, :id, :title, {:include_blank => ""}, {:class => "player_selection form-control js-player"} )
+      .col-sm-7
+        .row
+          .js-stats-cointainer
+  

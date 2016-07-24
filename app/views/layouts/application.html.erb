@@ -8,46 +8,15 @@
 </head>
 <body data-hook="controller-<%= controller_name %> action-<%= action_name %>">
   <header>
-    <div class="container">
-      <div class="logo">
-        <img src='<%= asset_path("logo2.png")%>' alt="logo">
-      </div>
-    <nav>
-      <% if current_user %>
-        <ul class="nav nav-pills">
-          <li><a href="<%= communities_path %>">
-            Communities
-          </a></li>
-          <li><a href="<%= new_community_path %>">
-          Create Community
-          </a></li>
-          <li><a href="<%= teams_path %>">
-            Show Teams
-          </a></li>
-          <li><a href="<%= new_team_path %>">
-            Create Team
-          </a></li>
-    
-          <li id="login"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-blood" %></li>
-        </ul> 
-      <% else %> 
-        <ul class="nav nav-pills"> 
-          <li role="presentation" ><%= link_to "Log In", new_user_session_path ,class: "btn btn-blood" %></a></li> 
-          <li role="presentation"><%= link_to "Register", new_user_registration_path %></a></li> 
-        </ul> 
-      <% end %>
-    </nav>
-  </div>
+    <%= render partial: "/layouts/nav" %>
   </header>
 
   <section id="main">
   <%= yield %>
   </section>
 
-  <footer>
 
   <%= render partial: "/layouts/footer" %>
 
-  </footer>
 </body>
 </html>

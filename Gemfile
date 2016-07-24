@@ -10,10 +10,12 @@ gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Bootstrap
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -27,6 +29,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design patterns to build a simple, robust and scaleable authorization system.
 gem 'pundit'
 
+gem 'haml'
+gem "haml-rails", "~> 0.9"
+
+gem 'active_model_serializers'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'

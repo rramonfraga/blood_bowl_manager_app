@@ -7,13 +7,10 @@ class Team < ActiveRecord::Base
   has_many :hosting, :class_name => 'Match', :foreign_key => 'host_team_id'
   has_many :visiting, :class_name => 'Match', :foreign_key => 'visit_team_id'
 
+  accepts_nested_attributes_for :players
 
-  def calculate_treasury!
-    self.players.each do |player|
-      self.treasury = self.treasury - player.player_value
-    end
-    self.save
-  end
+  validates :name, presence: true
+  validates :treasury, numericality: { greater_than_or_equal_to: 0 }
 
   def calculate_points(championship)
     championship.matches.reduce(0) do |points, match|
@@ -32,5 +29,7 @@ class Team < ActiveRecord::Base
       touchdonws + match.touchdonws(self)
     end
   end
+
+  private
 
 end

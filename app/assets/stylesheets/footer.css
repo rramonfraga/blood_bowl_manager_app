@@ -1,11 +1,15 @@
-footer{
-    background-color: #004377;
-    position: relative;
-    min-height: 60px;
-    clear:both;
+footer {
+  background-color: #004377;
+  position: relative;
+  min-height: 60px;
+  clear:both;
 }
 
-.footer{
+.logo-icon img{
+  height: 55px;
+}
+
+.footer {
   display: flex;
 }
 

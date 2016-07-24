@@ -7,23 +7,48 @@ nav{
   margin-top: -4px;
 }
 
+.nav-bar{
+  background-color: #004377;
+}
+
 .logo{
   width: 100%;
   text-align: center;
 }
+.navbar-default{
+  color: white;
+  background-color: #004377;
+}
 
-.nav-pills>li>a{
+.nav-bar>li>a{
+  padding: 10px 15px 10px;
   border-radius: 0px;
   color: #ecf0f1;
   font-size: 16px;
   border-radius: 0;
   padding: 6px 25px;
 }
-.nav-pills>li>a:hover{
+.nav-bar>li>a:hover{
   background-color: #8c0000;
   border-radius: 0px;
 }
 
-.nav-pills li:last-child{
+.nav-bar li:last-child{
   float: right;
 }
+
+.navbar-brand{
+  padding: 10px 20px 10px 0;
+}
+
+.navbar-collapse.in{
+  overflow-y: visible;
+}
+.navbar-toggle{
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 13px;
+}
+  
+ 

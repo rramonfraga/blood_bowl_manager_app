@@ -1,1 +1,0 @@
-json.players @players, partial: 'api/templates/skills/show', as: :players

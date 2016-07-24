@@ -15,19 +15,27 @@ class TeamsController < ApplicationController
 
   def new
     @team = current_user.teams.new
+    16.times { player = @team.players.build}
   end
 
   def create
+    pry
     @team = current_user.teams.new team_params
-    if @team.save
-      redirect_to(new_team_player_path(@team))
-    else
-      render(:new)
+    params["players"].each do |player|
+      if player["dorsal_number"] != "" || player["name"] != ""
+        new_player = Team.find_by(id: params[:team_id]).players.create(player_params(player))
+        new_player.assign_stats_from_the_template
+      end
     end
+    redirect_to '/'
   end
 
   private
   def team_params
-    params.require(:team).permit(:name, :template_team_id)                                
+    params.require(:team).permit(:name, :templates_team_id)                                
+  end
+
+  def player_params
+    params.permit(:name, :dorsal_number, :templates_player_id)
   end
 end

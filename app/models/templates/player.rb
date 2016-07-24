@@ -15,6 +15,4 @@ class Templates::Player < ActiveRecord::Base
             :double,
             presence: true
 
-  serialize :list_skills, Array
-
 end

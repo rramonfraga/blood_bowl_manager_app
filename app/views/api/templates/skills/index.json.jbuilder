@@ -1,1 +1,0 @@
-json.skills @skills, partial: 'api/templates/skills/show', as: :skills

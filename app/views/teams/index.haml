@@ -1,0 +1,7 @@
+%section.container
+  %h1 Your Teams
+  %ul.list-unstyled
+    - @teams.map do |team|
+      %li{ data: { user: { team: team.id} } }
+        %a{ href: team_path(id: team.id)}
+          = team.name

@@ -1,0 +1,53 @@
+%nav.navbar.navbar-default.navbar-static-top{ role: 'navigation'}
+  .container-fluid
+    .navbar-header.logo
+      = image_tag asset_path('logo2.png')
+
+    .collapse.navbar-collapse.navbar-ex1-collapse
+      - if current_user
+        %ul.nav.navbar-nav
+          %li.dropdown
+            %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'} }
+              Communities
+              %b.caret
+            %ul.dropdown-menu
+              - current_user.communities.each do |community|
+                %li
+                  %a{ href: community_path(id: community.id)}
+                    = community.name
+              %li 
+                %a{ href: new_community_path }
+                  + New Community
+
+          %li.dropdown
+            %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
+              Teams
+              %b.caret
+            %ul.dropdown-menu
+              - current_user.teams.each do |team|
+                - if team.id.present?
+                  %li
+                    %a{ href: team_path(id: team.id)}
+                      = team.name
+              %li 
+                %a{ href: new_team_path }
+                  + New Team
+
+        %ul.nav.navbar-nav.navbar-right
+          %li.active{ id: 'login' } 
+            = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-blood'
+
+        #form.navbar-form.navbar-right{ role: 'search' }
+          .form-group
+            %input.form-control{ type: 'text', placeholder: 'Search' }
+          %button.btn.btn-default{ type: 'submit' }
+
+
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li 
+            %b.glyphicon.glyphicon-user 
+            = link_to 'Sign Up', new_user_registration_path
+          %li 
+            %b.glyphicon.glyphicon-log-in
+            = link_to 'Login', new_user_session_path

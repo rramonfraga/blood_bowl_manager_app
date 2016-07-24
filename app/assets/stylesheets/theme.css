@@ -53,13 +53,12 @@
 }
 
 
-.row a{
+.row a {
   color: #8c0000;
 }
 .row-header{
   background-color: #8c0000;
   color:#ecf0f1;
-  font-size: ;
   padding: 5px;
 }
 .row-header-create{
