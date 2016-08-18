@@ -1,0 +1,28 @@
+%section.container
+  %h1 
+    Create a new Team
+    .form
+      = form_for @team, community_id: current_community.id do |f|
+        - if @team.errors.any?
+          %h2 
+            - pluralize(@team.errors.count, 'error') 
+            prohibited this team from being saved
+
+        %ul
+          - @team.errors.full_messages.each do |message|
+            %li
+              = message
+
+        = render 'form', f: f
+        
+        = render 'players/grid_stats'
+        - index = 0
+        = f.fields_for :players do |builder|
+          - index += 1
+          = render 'players/form', team: @team, f: builder, index: index
+
+
+        .actions
+          = f.submit 'Create Team', class: "btn btn-lg btn-block btn-blood"
+
+= render partial: '/layouts/small_modal'

@@ -5,50 +5,37 @@ class Championship < ActiveRecord::Base
   has_many :seasons
   has_many :matches, through: :seasons
 
-  validates :name, :kind, presence: true
+  validates :name, :kind, :community_id, presence: true
 
-  def has_team_included?(team)
-    self.teams.reduce(false) do |included, championship_team|
-      included || championship_team.id == team.id
+  def create_seasons
+    (@teams.count - 1).times do |index|
+      season = seasons.create round: index + 1
+      season.create_matches(@teams)
+      rotate_teams
     end
   end
 
-  def has_team_included_a_user?(user)
-    user.teams.reduce(false) do |included, team|
-      included || self.has_team_included?(team)
+  def rotate_teams
+    last = @teams.pop
+    @teams.insert(1, last)
+  end
+
+  def clasification
+    teams.sort do |team1, team2|
+      team2.calculate_points(self) <=> team1.calculate_points(self)
     end
   end
 
-  def start_seasons
-    teams_ids = self.arrays_with_ids_team
-    (teams_ids.size - 1).times do |index|
-      season = self.seasons.create round: index + 1
-      season.create_matches(teams_ids)
-      teams_ids = self.rotate_teams!(teams_ids)
-    end
-    self.start!
-  end
-
-  def rotate_teams!(teams_ids)
-    last = teams_ids.pop
-    teams_ids.insert(1, last)
-  end
-
-  def arrays_with_ids_team
-    self.teams.map do |team|
-      team.id
-    end
+  def join!(team)
+    self.teams << team
+    save!
   end
 
   def start!
     self.start = true
-    self.save
-  end
-
-  def clasification
-    self.teams.sort do |team1, team2|
-      team2.calculate_points(self) <=> team1.calculate_points(self)
-    end
+    @teams = teams.to_a
+    create_seasons
+    save!
   end
 
 end

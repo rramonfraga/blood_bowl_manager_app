@@ -10,9 +10,9 @@ class MatchesController < ApplicationController
     end
   end
 
-  def finished
+  def finish
     match = Match.find_by(id: params[:id])
-    match.finished!
+    match.finish!
     redirect_to action: 'show', controller: 'championships', community_id: params["community_id"], id: params["championship_id"]
   end
 end

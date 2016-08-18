@@ -8,6 +8,12 @@
   background-color: #8c0000;
   border-color: #3c0000;
 }
+
+.btn-create-championship{
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 .btn-edit-player{
   margin-top: 15px;
 }
@@ -44,16 +50,7 @@
 }
 
 
-#main{
-  background-color:#ecf0f1;
-  height: 100%;
-  overflow:auto;
-  min-height: 83vh;
-  padding-bottom: 20px;
-}
-
-
-.row a {
+a .skill {
   color: #8c0000;
 }
 .row-header{
@@ -84,15 +81,12 @@
   padding: 7px 12px;
   margin-right: 0;
 }
+
 .row .btn-row:hover{
   background-color: #004377;
   color:#ecf0f1;
 }
 
-
-.validate .btn{
-  font-size: 20px;
-}
 
 
 

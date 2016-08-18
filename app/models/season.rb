@@ -2,10 +2,16 @@ class Season < ActiveRecord::Base
   belongs_to :championship
   has_many :matches
 
-  def create_matches(teams_ids)
-    teams_ids.size/2.times do |index|
-      self.matches.create host_team: Team.find_by(id: teams_ids[index]),
-                          visit_team: Team.find_by(id: teams_ids[(teams_ids.size - 1) - index])
+  def create_matches(teams)
+    rounds = teams.size/2
+    rounds.times do |index|
+      matches.create  host_team: find_team(teams[index].id ),
+                      visit_team: find_team(teams[ (teams.size - 1) - index].id )
     end
+  end
+
+  private
+  def find_team(id)
+    Team.find_by(id: id)
   end
 end

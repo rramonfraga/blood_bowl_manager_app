@@ -1,0 +1,16 @@
+nav{
+  background-color: #004377;
+}
+
+.navbar-fixed-top{
+  border-width: 0;
+}
+
+.community_select a{
+  color: #E5A517;
+  font-weight: bold;
+}
+
+.community_select a:hover{
+  color: #E5A517; 
+}

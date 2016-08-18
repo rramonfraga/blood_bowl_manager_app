@@ -1,0 +1,26 @@
+%section.container
+  %h1 Add a new Championship
+
+  - if @championship.errors.any?
+    %ul.list-unstyled
+      - @championship.errors.full_messages.each do |msg|
+        %li.alert.alert-danger{ role: 'alert' } msg
+
+  = form_for @championship, url: championships_path() do |form|
+    .form-group
+      = form.label :name 
+      = form.text_field :name, class: 'form-control'
+    
+    .form-group
+      = form.label :kind
+      %select.form-control{ name: 'kind', id: 'kind' }
+        %option{ value: 'League' } League
+        %option{ value: 'Swiss' } Swiss
+        %option{ value: 'Play-off' } Play-off
+
+    .form-group
+      = form.label "Treasury"
+      = form.number_field :init_treasury, class: 'form-control', default: 1000000
+  
+    .actions
+      = form.submit 'Create Team', :class => "btn btn-lg btn-primary btn-block"

@@ -1,0 +1,21 @@
+!!! 5
+%html
+  %head
+    %title Spiked Ball
+    = favicon_link_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  %body{ data: { hook: 'controller-' + controller_name + 'action-' + action_name }}
+    #wrap
+      = render partial: "layouts/nav"
+
+      %main
+        %section
+          = yield 
+
+    = render partial: "layouts/footer"
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>

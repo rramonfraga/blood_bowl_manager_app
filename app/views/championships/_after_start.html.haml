@@ -1,0 +1,45 @@
+.row
+  %section.col-sm-4
+    %ul.list-unstyled
+      - @championship.seasons.each do |season|
+        %li{ data: { season: season.id } }
+          %h3 
+            Round: 
+            = season.round
+      
+          %ul.list-unstyled
+            - season.matches.each do |match|
+              %li{ data: { match: match.id } }
+                - if match.finish?
+                  %a.match{ href: championship_match_path(id: match.id, championship_id: @championship.id, community_id: current_community.id) }
+                    = match.title_result
+                - else
+                  - if match.can_validate?(current_user)
+                    %a.match.btn.btn-blood{ href: new_championship_match_feat_path(championship_id: params[:id], match_id: match.id, community_id: current_community.id) }
+                      = match.title
+                  - else
+                    %a.match{ href: championship_match_path(id: match.id, championship_id: @championship.id, community_id: current_community.id) }
+                      = match.title
+
+  %section.col-sm-8
+    %h3
+      .row.row-header
+        .col-sm-3
+          Position
+        .col-sm-4
+          Team Name
+        .col-sm-2
+          Points
+        .col-sm-3
+          TD
+
+    - @clasification.each_with_index do |team, index|
+      .row.row-main
+        .col-sm-3
+          = index + 1
+        .col-sm-4
+          = team.name
+        .col-sm-2
+          = team.calculate_points(@championship)
+        .col-sm-3
+          = team.calculate_touchdonws(@championship)

@@ -1,0 +1,14 @@
+.modal.fade#smallModal{ tabindex: -1, role: 'dialog', aria: { labelledby: 'smallModal', hidden: true }}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button', data: { dismiss: 'modal' }, aria: { hidden: true } } 
+          &times;
+        %h4.modal-title#myModalLabel
+          Small Modal
+      .modal-body
+        %h3 
+          Modal Body
+      .modal-footer
+        %button.btn.btn-blood{ type: 'button', data: { dismiss: 'modal' }}
+          Close

@@ -1,0 +1,42 @@
+%section.container.validate
+  %h1 Validate Match
+  .row
+    .col-sm-5
+      %h2 
+        = @match.host_result.to_s + ' - ' + @match.host_team.name
+    .col-sm-2
+      %h2 
+        VS
+    .col-sm-5
+      %h2 
+        = @match.visit_team.name  + ' - ' +  @match.visit_result.to_s
+  
+  .container
+    - if @match.feats.present?
+      .row.row-header
+        .col-sm-3
+          Team
+        .col-sm-3
+          Player 
+        .col-sm-3
+          Kind
+        .col-sm-2
+          Casuality
+        .col-sm-1
+
+    - @match.feats.each do | feat |
+      - if feat.player != nil
+        .row.row-main
+          .col-sm-3
+            = feat.player.team.name
+          .col-sm-3
+            = feat.player.name
+          .col-sm-3
+            = feat.kind
+          .col-sm-2
+            = feat.casuality
+          .col-sm-1
+            = button_to 'Delete', { action: 'destroy', id: feat.id }, method: :delete, class: 'btn-row'
+
+  = render 'form'
+  = button_to 'Finish the Match', {action: 'finish', controller: 'matches', championship_id: params['championship_id'], id: params['match_id'] }, :method=>:post, class: 'btn btn-lg btn-blood'

@@ -1,0 +1,52 @@
+%section.container
+  .row
+    .col-md-8
+      %h1.col-md-8
+        = @community.name
+    .col-md-4
+      %a.btn.btn-lg.btn-primary.btn-block.btn-create-championship{ href: new_championship_path(community_id: params[:community_id]) }
+        Create a Championship
+  .row
+    .col-md-12
+      %h2 Current Championships:
+  .row
+    - @championships.each do |championship|
+      .col-md-8 
+        %ul.list-unstyled
+          %li{ data: { championship: championship.id } }
+            %h2
+              %a{ href: championship_path(id: championship.id, community_id: params[:community_id]) }
+                = championship.name  + " " + championship.kind
+      .col-md-4
+        - if current_user.free_teams.blank?
+          .form-group
+            = form_for(championship, as: championship, url: "/#{@community.id}/championships/#{championship.id}/join", html: { method: :post, class: 'form-signin' }) do |f|
+              .row
+                .field.col-md-8
+                  = f.label :team_ids, class: 'sr-only'
+                  = f.collection_select(:team_ids, current_user.free_teams, :id, :name, { include_blanck: true }, class: 'form-control')
+
+                .actions.col-md-4
+                  = f.submit "Join Team", class: "btn btn-primary"
+  .row
+    .col-md-12
+      %h2 Players with more Touchdowns: 
+      %ul.list-unstyled
+        - @championships.each do |championship|
+          %li{ data: { championship: championship.id } }
+            %h2
+              %a{ href: championship_path(id: championship.id, community_id: params[:community_id]) }
+                = championship.name  + " " + championship.kind
+  / .row
+  /   .col-md-12
+  /     %h2 Players with more Injuries: 
+  /     %ul.list-unstyled
+  /       - @championships.each do |championship|
+  /         %li{ data: { championship: championship.id } }
+  /           %h2
+  /             %a{ href: community_championship_path(id:championship.id, community_id: @community.id) }
+  /               = championship.name  + " " + championship.kind
+
+
+
+

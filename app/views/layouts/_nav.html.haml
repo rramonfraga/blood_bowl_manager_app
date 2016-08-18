@@ -1,0 +1,55 @@
+%nav.navbar.navbar-fixed-top  
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar'}}
+      %a.navbar-brand{ href:'#'}
+      = image_tag asset_path('spikedball_header.png')
+      
+    #nav-bar.navbar-collapse.collapse{ role: 'navigation'}
+      %ul.nav.navbar-nav.navbar-right
+        - if current_user
+          %li.community_select
+            %a.current_community_id.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
+              %span
+                = current_community.name
+              %b.caret
+            %ul.dropdown-menu
+              - current_user.communities.each do |community|
+                %li
+                  %a{ href: "/#{community.id}" }
+                    = community.name
+              %li 
+                %a{ href: new_community_path }
+                  + New Community
+
+          %li.dropdown
+            %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
+              Teams
+              %b.caret
+            %ul.dropdown-menu
+              - current_user.teams.each do |team|
+                - if team.id.present?
+                  %li
+                    %a{ href: team_path(id: team.id, community_id: current_community.id)}
+                      = team.name
+              %li 
+                %a{ href: new_team_path(community_id: current_community.id) }
+                  + New Team
+
+          %li#account-toggle.dropdown-toggle
+            %a.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' }, role: 'button', aria: { expanded: 'true' } }
+              %img.img-circle.profile-img{ src: 'https://secure.gravatar.com/avatar/e3a3a8727b3aab3940a55af972bd541?s=256&amp;d=https://s3-eu-west-1.amazonaws.com/codacy-public-assets/default-user-6.png', width: '18', height: '18' }
+              %i.fa.fa-chevron-down.codacy-caret
+
+              %ul.dropdown-menu
+                %li
+                  = link_to 'Your account', '#'
+                %li
+                  = link_to 'Log out', destroy_user_session_path, method: :delete
+
+
+        - else
+          %li 
+            = link_to 'Login', new_user_session_path, class: 'button button__success'
+          %li 
+            = link_to 'Sign Up', new_user_registration_path, class: 'button button__success'

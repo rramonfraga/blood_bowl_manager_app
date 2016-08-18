@@ -4,12 +4,11 @@ class CreatePlayers < ActiveRecord::Migration
       t.references :team, index: true
       t.string  :title
       t.string  :name
-      t.integer :templates_player_id
-      t.integer :dorsal_number
-      t.integer :value
-      t.integer :experience
+      t.references :player, class_name: 'Templates::Player', index: true
+      t.integer :dorsal
+      t.integer :cost
+      t.integer :experience, default: 0
       t.string  :level, default: "Rookie"
-      t.string  :list_skills
       t.boolean :level_up, default: false
       t.integer :mvp
       t.integer :ma

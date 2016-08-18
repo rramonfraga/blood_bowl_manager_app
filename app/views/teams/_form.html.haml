@@ -1,0 +1,41 @@
+.row
+  .col-sm-4
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: 'form-control' 
+
+  .col-sm-5
+    .form-group
+      = f.label :team
+      = f.collection_select(:team_id, Templates::Team.all, :id, :name, { include_blank: true }, class: 'form-control js-team-selector')
+  .col-sm-3
+    .form-group
+      = f.label :treasury
+      = f.text_field :treasury, class: 'form-control js-treasury', data: {treasury: @team.treasury }, readonly: true
+
+.row
+  .col-sm-4
+    .form-group.re-rolls
+      = f.label :re_rolls, "Re-Rolls"
+      = f.select :re_rolls, options_for_select(0..5), {include_blank: false }, class: 'form-control js-rerolls js-extra-selector js-extra-cost', data: { base: 0, cost: 0 }
+
+  .col-sm-4
+    .form-group.fan-factor
+      = f.label :fan_factor, "Fan Factor"
+      = f.select :fan_factor, options_for_select(0..9), {include_blank: false }, class: 'form-control js-extra-selector js-extra-cost', data: { base: 10000, cost: 0 }
+
+  .col-sm-4
+    .form-group.assistant-coaches
+      = f.label :assistant_coaches, "Assistant Coaches"
+      = f.select :assistant_coaches, options_for_select(0..5), {include_blank: false }, class: 'form-control js-extra-selector js-extra-cost', data: { base: 10000, cost: 0 }
+
+.row
+  .col-sm-4
+    .form-group.cheerleaders
+      = f.label :cheerleaders
+      = f.select :cheerleaders, options_for_select(0..5), {include_blank: false }, class: 'form-control js-extra-selector js-extra-cost', data: { base: 10000, cost: 0 }
+
+  .col-sm-4
+    .form-group.apothecaries
+      = f.label :apothecaries
+      = f.select :apothecaries, options_for_select(0..5), {include_blank: false }, class: 'form-control js-extra-selector js-extra-cost', data: { base: 50000, cost: 0 }

@@ -1,0 +1,7 @@
+%h2 
+  Current Teams:
+  %ul.list-unstyled
+    - @championship.teams.each do |team|
+      %li{ data: { team: team.id } }
+        %a.team{ href: team_path(id: team.id) }
+          = team.name

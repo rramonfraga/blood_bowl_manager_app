@@ -1,0 +1,27 @@
+.row.row-main.row-main-create.js-player
+  .col-sm-5
+    .row
+      .field.col-sm-1.number
+        = index
+
+      .field.col-sm-2
+        .form-group
+          = f.text_field :dorsal, class: 'form-control'
+
+      .field.col-sm-4.name
+        .form-group
+          = f.text_field :name, class: 'form-control'
+
+      .field.col-sm-5.player
+        .form-group
+          = f.collection_select(:player_id, team.players, :id, :title, { include_blank: true }, { class: "form-control js-player-selector"} )
+
+  .col-sm-7
+    .row.js-player-attributes
+      .field.col-sm-1.ma.js-ma
+      .field.col-sm-1.st.js-st
+      .field.col-sm-1.ag.js-ag
+      .field.col-sm-1.av.js-av
+      .field.col-sm-2.cost.js-cost{ data: { cost: 0 } }
+      .field.col-sm-4.skills.js-skills
+      .field.col-sm-2.experience.js-experience

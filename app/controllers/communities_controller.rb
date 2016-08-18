@@ -1,12 +1,8 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @communities = current_user.communities.order(:created_at)
-  end
-
   def show
-    if @community = Community.find_by(id: params[:id])
+    if @community = Community.find_by(id: params[:community_id])
       @championships = @community.championships
     else
       render status: 404, file: '/public/404.html'
@@ -23,7 +19,7 @@ class CommunitiesController < ApplicationController
       render(:new)
     else
       current_user.communities << @community
-      redirect_to(communities_path)
+      redirect_to(communities_path(@community))
     end
   end
 

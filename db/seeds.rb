@@ -1,58 +1,3 @@
-
-=begin
-def create_skills
-  skill_file = IO.read('./public/skills.json')
-  skills = JSON.parse(skill_file)
-  skills.each do |skill|
-    Skill.create  name: skill["name"], 
-                  category: skill["category"], 
-                  description: skill["description"]
-  end
-end
-
-def create_teams
-  team_file = IO.read('./public/teams.json')
-  teams = JSON.parse(team_file)
-  teams.each do |team|
-    Team.create   name: team["name"], 
-                  reroll_value: team["reroll_value"], 
-                  description: team["description"],
-                  stakes: team["stakes"], 
-                  revive: team["revive"],
-                  apothecary: team["apothecary"]
-  end
-end
-
-
-def create_players
-  team_file = IO.read('./public/teams.json')
-  teams = JSON.parse(team_file)
-  teams.each do |this_team|
-    team = Team.find_by(name: this_team["name"])
-    this_team["players"].each do |player|
-      new_player = team.players.create  quantity: player["quantity"], 
-                                        title: player["title"], 
-                                        cost: player["cost"],
-                                        ma: player["ma"], 
-                                        st: player["st"],
-                                        ag: player["ag"], 
-                                        av: player["av"],
-                                        normal: player["normal"],
-                                        double: player["double"],
-                                        feeder: player["feeder"],
-                                        list_skills: []
-      
-      player["skills"].each do |skill|
-        new_player.list_skills << skill["name"]
-        skill_to_assign = Skill.find_by(name: skill["name"])
-        new_player.skills << skill_to_assign
-      end
-      new_player.save
-    end
-  end
-end
-=end
-
 def create_skill_templates
   skill_file = IO.read('./public/skills.json')
   skills = JSON.parse(skill_file)
@@ -67,12 +12,12 @@ def create_team_templates
   team_file = IO.read('./public/teams.json')
   teams = JSON.parse(team_file)
   teams.each do |team|
-    Templates::Team.create name: team["name"], 
-                        reroll_value: team["reroll_value"], 
-                        description: team["description"],
-                        stakes: team["stakes"], 
-                        revive: team["revive"],
-                        apothecary: team["apothecary"]
+    Templates::Team.create  name: team["name"], 
+                            reroll_value: team["reroll_value"], 
+                            description: team["description"],
+                            stakes: team["stakes"], 
+                            revive: team["revive"],
+                            apothecary: team["apothecary"]
   end
 end
 
@@ -83,16 +28,16 @@ def create_player_templates
   teams.each do |this_team|
     team = Templates::Team.find_by(name: this_team["name"])
     this_team["players"].each do |player|
-      new_player = team.players.create quantity: player["quantity"], 
-                                                title: player["title"], 
-                                                cost: player["cost"],
-                                                ma: player["ma"], 
-                                                st: player["st"],
-                                                ag: player["ag"], 
-                                                av: player["av"],
-                                                normal: player["normal"],
-                                                double: player["double"],
-                                                feeder: player["feeder"]
+      new_player = team.players.create  quantity: player["quantity"], 
+                                        title: player["title"], 
+                                        cost: player["cost"],
+                                        ma: player["ma"], 
+                                        st: player["st"],
+                                        ag: player["ag"], 
+                                        av: player["av"],
+                                        normal: player["normal"],
+                                        double: player["double"],
+                                        feeder: player["feeder"]
       
       player["skills"].each do |skill|
         skill_to_assign = Templates::Skill.find_by(name: skill["name"])
@@ -103,14 +48,58 @@ def create_player_templates
   end
 end
 
-def create_user
-  User.create(name: 'Rafa', email: 'rafael@cabify.com', password: 'Croqueto22')
+def create_communities
+  Community.create(name: 'Communities')
+  Community.create(name: 'Mr. Mind')
 end
+
+def create_championships
+  community = Community.find_by name: 'Mr. Mind'
+  community.championships.create name: "First League 2016 - 2017", kind: "League"
+end
+
+def create_team_and_players(user)
+  random = Random.new
+  random = random.rand(24)
+  team = user.teams.create  name: "Team #{user.username}",
+                            team_id: random,
+                            re_rolls: 2,
+                            fan_factor: 0,
+                            assistant_coaches: 0,
+                            cheerleaders: 0,
+                            apothecaries: 0
+  11.times do |index| 
+    number = team.team.players.first.id
+    team.players.create name: "Player #{index + 1}", dorsal: "#{index + 1}", player_id: number
+  end
+  championship = Championship.find_by(name: "First League 2016 - 2017")
+  championship.join!(team)
+  team.save!
+  team.treasury = team.treasury - team.value
+  team.save!
+end
+
+def create_users
+  community = Community.find_by name: 'Mr. Mind'
+  users = []
+  users << community.users.create(username: 'Rata', email: 'rataknight@gmail.com', password: 'SpikedBall')
+  users << community.users.create(username: 'Avi', email: 'javitoms@hotmail.com', password: 'SpikedBall')
+  users << community.users.create(username: 'Willas', email: 'rodri1984@gmail.com', password: 'SpikedBall')
+  users << community.users.create(username: 'Azureh', email: 'diegobonilla@gmail.com', password: 'SpikedBall')
+  users << community.users.create(username: 'Marilena', email: 'mmrromerodeavila@gmail.com', password: 'SpikedBall')
+  users << community.users.create(username: 'Jamao', email: 'angel.brunodiaz@gmail.com', password: 'SpikedBall')
+  users << community.users.create(username: 'Adamsemeth', email: 'adamsemeth@gmail.com', password: 'SpikedBall')
+  #users << community.users.create(username: 'Bri', email: 'bri@spikedball.com', password: 'SpikedBall')
+  users.each { |user| create_team_and_players(user) }
+end
+
 
 create_skill_templates
 create_team_templates
 create_player_templates
-create_user
+create_communities
+create_championships
+create_users
 
 
 =begin
@@ -142,7 +131,7 @@ def create_team_and_players
     random = Random.new
     random = random.rand(24)
     team = user.teams.create name: "Team #{index + 1}",
-                                  template_team_id: random,
+                                  team_id: random,
                                   re_rolls: 2,
                                   fan_factor: 0,
                                   assistant_coaches: 0,
@@ -152,8 +141,8 @@ def create_team_and_players
     11.times do |index| 
       number = Team.find_by(id: random).players.first.id
       player = team.players.create name: "Player #{index + 1}",
-                                        dorsal_number: "#{index + 1}",
-                                        template_player_id: number
+                                        dorsal: "#{index + 1}",
+                                        player_id: number
       player.assign_stats_from_the_template
     end
     championship = Championship.find_by(name: "Championship")

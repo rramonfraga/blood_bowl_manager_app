@@ -1,0 +1,30 @@
+.row.row-main.row-main-create.js-player
+  .col-sm-5
+    .row
+      .field.col-sm-1.number
+        = index
+      .field.col-sm-2
+        = player.dorsal
+      .field.col-sm-4.name
+        = player.name
+      .field.col-sm-5.player
+        = player.title
+  .col-sm-7
+    .row
+      .field.col-sm-1.ma
+        = player.ma
+      .field.col-sm-1.st
+        = player.st
+      .field.col-sm-1.ag
+        = player.ag
+      .field.col-sm-1.av
+        = player.av
+      .field.col-sm-2.cost
+        = player.cost
+      .field.col-sm-4.skill
+        - player.skills.each do |skill|
+          %a.js-skill{ data: { skill: { id: skill.id }}}
+            = skill.name
+          ,
+      .field.col-sm-2.experience
+        = player.experience

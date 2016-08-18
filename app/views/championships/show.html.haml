@@ -1,0 +1,15 @@
+%section.container.championship
+  .row
+    .col-md-8
+      %h1
+        = @championship.name
+
+    .col-md-4
+      - unless @championship.start?
+        = button_to "Start #{@championship.name}", { controller: "championships", action: "start", id: @championship.id, community_id: @championship.community.id }  , method: :post, class: "btn btn-lg btn-primary btn-block btn-create-championship"
+
+  - if @championship.start?
+    = render 'after_start'
+
+  - else
+    = render 'before_start'

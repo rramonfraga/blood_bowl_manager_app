@@ -1,0 +1,16 @@
+%section.container
+  %h1 Add a new Community
+
+  - if @community.errors.any?
+    %ul.list-unstyled
+      - @community.errors.full_messages.each do |msg|
+        %li.alert.alert-danger{ role: 'alert' }
+          = msg
+
+  = form_for @community do |form|
+    .form-group
+      = form.label :name, class: 'sr-only'
+      = form.text_field :name, class: 'form-control', placeholder: "Name"
+
+    %button.btn.btn-lg.btn-primary.btn-block{ type: 'submit' }
+      Add Community

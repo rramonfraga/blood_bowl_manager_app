@@ -4,7 +4,7 @@ class CreateFeats < ActiveRecord::Migration
       t.references :match, index: true
       t.references :player, index: true
       t.string :kind
-      t.integer :kind_number
+      t.string :casuality
       t.boolean :host_team, default: false
 
       t.timestamps null: false

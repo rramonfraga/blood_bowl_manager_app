@@ -1,0 +1,19 @@
+%section.container
+  %h1 
+    = @match.title
+
+  %h2 
+    = @host_team.value.to_s + ' VS ' + @visit_team.value.to_s
+
+  .row
+    = render 'players/grid_stats' 
+    - @host_team.players.each_with_index do |player, index|
+      = render 'players/player', player: player, index: index + 1 
+  .row
+
+  .row
+    = render 'players/grid_stats'
+    - @visit_team.players.each_with_index do |player, index|
+      = render 'players/player', player: player, index: index + 1
+
+= render  partial: '/layouts/small_modal'

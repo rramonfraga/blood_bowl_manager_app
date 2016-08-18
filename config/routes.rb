@@ -1,25 +1,29 @@
 Rails.application.routes.draw do
 
-  root 'communities#index'
+  root 'welcome#index'
+  get '/welcome', to: 'welcome#welcome'
 
-  devise_for :users
+  devise_for :users, controllers: { confirmations: 'confirmations' }
 
-  resources :communities, only: [:index, :show, :new, :create] do
+  resources :communities, only: [:new, :create]
+
+  scope ':community_id' do
+    get '/' => 'communities#show'
+
     resources :championships, only: [:show, :new, :create] do
       resources :matches, only: [:show] do
         resources :feats, only: [:new, :create, :destroy]
       end
     end
+
+    post 'championships/:id/start' => 'championships#start'
+    post 'championships/:id/join' => 'championships#join'
+    post 'championships/:championship_id/matches/:id/finish' => 'matches#finish'
+
+    resources :teams, only: [:index, :show, :new, :create] do
+      resources :players, only: [:new, :create, :destroy]
+    end
   end
-
-  post '/communities/:community_id/championships/:id/start' => 'championships#start'
-  post '/communities/:community_id/championships/:id/join' => 'championships#join'
-  post '/communities/:community_id/championships/:championship_id/matches/:id/finished' => 'matches#finished'
-
-  resources :teams, only: [:index, :show, :new, :create] do
-    resources :players, only: [:index, :new, :create, :edit, :update, :destroy]
-  end
-
 
   namespace :api, defaults: {format: 'json'} do
     namespace :templates do
@@ -28,5 +32,4 @@ Rails.application.routes.draw do
       resources :skills, only: [:index, :show]
     end
   end
-
 end

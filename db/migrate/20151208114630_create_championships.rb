@@ -6,6 +6,7 @@ class CreateChampionships < ActiveRecord::Migration
       t.string :kind, default: "League"
       t.integer :init_treasury, default: 1000000
       t.boolean :start, default: false
+      t.boolean :finish, default: false
 
       t.timestamps null: false
     end

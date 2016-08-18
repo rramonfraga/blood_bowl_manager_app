@@ -12,12 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20151210173534) do
 
+  create_table "aptitudes", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_aptitudes_on_player_id"
+    t.index ["skill_id"], name: "index_aptitudes_on_skill_id"
+  end
+
   create_table "championships", force: :cascade do |t|
     t.string   "name"
     t.integer  "community_id"
     t.string   "kind",          default: "League"
     t.integer  "init_treasury", default: 1000000
     t.boolean  "start",         default: false
+    t.boolean  "finish",        default: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.index ["community_id"], name: "index_championships_on_community_id"
@@ -33,10 +43,10 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "match_id"
     t.integer  "player_id"
     t.string   "kind"
-    t.integer  "kind_number"
-    t.boolean  "host_team",   default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "casuality"
+    t.boolean  "host_team",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["match_id"], name: "index_feats_on_match_id"
     t.index ["player_id"], name: "index_feats_on_player_id"
   end
@@ -45,7 +55,7 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "season_id"
     t.integer  "host_team_id"
     t.integer  "visit_team_id"
-    t.boolean  "finished",      default: false
+    t.boolean  "finish",        default: false
     t.integer  "host_result",   default: 0
     t.integer  "visit_result",  default: 0
     t.datetime "created_at",                    null: false
@@ -56,8 +66,9 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "community_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.boolean  "admin",        default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["community_id"], name: "index_participations_on_community_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
@@ -66,20 +77,20 @@ ActiveRecord::Schema.define(version: 20151210173534) do
     t.integer  "team_id"
     t.string   "title"
     t.string   "name"
-    t.integer  "templates_player_id"
-    t.integer  "dorsal_number"
-    t.integer  "value"
-    t.integer  "experience",          default: 0
-    t.string   "level",               default: "Rookie"
-    t.string   "list_skills"
-    t.boolean  "level_up",            default: false
+    t.integer  "player_id"
+    t.integer  "dorsal"
+    t.integer  "cost"
+    t.integer  "experience", default: 0
+    t.string   "level",      default: "Rookie"
+    t.boolean  "level_up",   default: false
     t.integer  "mvp"
     t.integer  "ma"
     t.integer  "st"
     t.integer  "ag"
     t.integer  "av"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["player_id"], name: "index_players_on_player_id"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
@@ -103,17 +114,18 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   create_table "teams", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.integer  "templates_team_id"
+    t.integer  "team_id"
     t.integer  "treasury",          default: 1000000
-    t.integer  "value",             default: 0
-    t.integer  "re_rolls",          default: 0
-    t.integer  "fan_factor",        default: 0
-    t.integer  "assistant_coaches", default: 0
-    t.integer  "cheerleaders",      default: 0
-    t.integer  "apothecaries",      default: 0
-    t.integer  "halfling_chef",     default: 0
+    t.integer  "value"
+    t.integer  "re_rolls"
+    t.integer  "fan_factor"
+    t.integer  "assistant_coaches"
+    t.integer  "cheerleaders"
+    t.integer  "apothecaries"
+    t.integer  "halfling_chef"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["team_id"], name: "index_teams_on_team_id"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -163,19 +175,25 @@ ActiveRecord::Schema.define(version: 20151210173534) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "username"
+    t.boolean  "admin",                  default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

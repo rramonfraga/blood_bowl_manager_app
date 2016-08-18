@@ -1,0 +1,37 @@
+%section.container
+  %h1
+    = @team.name + ' - ' + @team.team.name + ' - ' + @team.user.username
+
+  %h2 
+    Treasury:
+    = @team.treasury
+
+    Value:
+    = @team.value
+
+  = render 'players/grid_stats'
+  - @players.each_with_index do |player, index|
+    = render "players/player", player: player, index: index + 1
+
+  %section.assistant
+    .reroll
+      Re-Rolls: 
+      = @team.re_rolls
+    .fan-factor
+      Fan Factor: 
+      = @team.fan_factor
+    .assistant_coaches
+      Assistant Coaches: 
+      = @team.assistant_coaches
+    .cheerleaders
+      Cheerleaders: 
+      = @team.cheerleaders
+    .Apothecaries
+      Apothecaries: 
+      = @team.apothecaries
+
+    %a.btn.btn-blood
+      Hire Player
+
+  = render  partial: '/layouts/small_modal'
+

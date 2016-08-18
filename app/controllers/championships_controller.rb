@@ -2,21 +2,21 @@ class ChampionshipsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @community = Community.find_by(id: params[:community_id])
+    @community = Community.find_by(id: current_community.id)
     @championship = @community.championships.new
   end
 
   def create
-    @championship = Community.find_by(id: params[:community_id]).championships.new championship_params
+    @championship = Championship.new championship_params
     if @championship.save
-      redirect_to(community_path(@championship.community_id))
+      render action: 'show', controller: 'communities', community_id: current_community.id
     else
       render(:new)
     end
   end
 
   def show
-    if @championship = Championship.find_by(id: params[:id])
+    if @championship = Championship.find_by(id: params[:id]) 
       @clasification = @championship.clasification
     else
       render status: 404, file: '/public/404.html'
@@ -25,9 +25,10 @@ class ChampionshipsController < ApplicationController
 
   def join
     championship = Championship.find_by(id: params[:id])
-    if current_user && championship
-      championship.teams << current_user.teams.find_by(id: params[:team_id])
-      redirect_to action: 'show', controller: 'championships', community_id: championship.id, id: championship.id
+    team = Team.find_by(id: params[:championship][:team_ids])
+    if championship.present? && team.present?
+      championship.join(team)
+      redirect_to action: 'show', controller: 'communities', community_id: current_community.id
     else
       render status: 404, file: '/public/404.html'
     end
@@ -35,14 +36,13 @@ class ChampionshipsController < ApplicationController
 
   def start
     championship = Championship.find_by(id: params[:id])
-    if championship.start == false
-      championship.start_seasons
-    end      
-    redirect_to action: 'show', controller: 'championships', community_id: championship.community.id, id: championship.id
+    championship.start! if !championship.start?     
+    redirect_to action: 'show', controller: 'championships', id: championship.id
   end
 
   private
   def championship_params
-    params.require(:championship).permit(:name, :kind, :init_treasury)                                
+    base_params = params.require(:championship).permit(:name, :kind, :init_treasury)
+    base_params.merge!(community_id: current_community.id)
   end
 end
