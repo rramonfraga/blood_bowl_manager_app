@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     teams.map { |team| team if !team.joined? }
   end
 
+  def championships
+    teams.flat_map { |team| team.championships }.compact
+  end
+
 end

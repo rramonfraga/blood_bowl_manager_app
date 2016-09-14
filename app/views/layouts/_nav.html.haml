@@ -3,13 +3,13 @@
     .navbar-header
       %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar'}}
       %a.navbar-brand{ href:'#'}
-      = image_tag asset_path('spikedball_header.png')
+      = image_tag asset_path('spiked_ball_logo.jpg'), width: 50, height: 50
       
     #nav-bar.navbar-collapse.collapse{ role: 'navigation'}
       %ul.nav.navbar-nav.navbar-right
         - if current_user
-          %li.community_select
-            %a.current_community_id.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
+          %li.dropdown.nav-community-select
+            %a.current-community-id.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
               %span
                 = current_community.name
               %b.caret
@@ -22,7 +22,18 @@
                 %a{ href: new_community_path }
                   + New Community
 
-          %li.dropdown
+          %li.dropdown.nav-championships-select
+            %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
+              %span
+                Championships
+              %b.caret
+            %ul.dropdown-menu
+              - current_user.championships.each do |championship|
+                %li
+                  %a{ href: "/#{current_community.id}/championships/#{championship.id}" }
+                    = championship.name
+
+          %li.dropdown.nav-teams-select
             %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
               Teams
               %b.caret
