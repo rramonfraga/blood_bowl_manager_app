@@ -50,7 +50,7 @@ end
 
 def create_communities
   Community.create(name: 'Communities')
-  Community.create(name: 'Mr. Mind')
+  Community.create(name: 'Generación X')
 end
 
 def create_championships
@@ -98,8 +98,8 @@ create_skill_templates
 create_team_templates
 create_player_templates
 create_communities
-create_championships
-create_users
+#create_championships
+#create_users
 
 
 =begin
