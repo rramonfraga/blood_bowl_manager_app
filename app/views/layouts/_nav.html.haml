@@ -2,8 +2,8 @@
   .container
     .navbar-header
       %button.navbar-toggle.collapsed{ type: 'button', data: { toggle: 'collapse', target: '#navbar'}}
-      %a.navbar-brand{ href:'#'}
-      = image_tag asset_path('spiked_ball_logo.jpg'), width: 50, height: 50
+      %a#logo{ href:'/' }
+        = image_tag asset_path('logo-spiked-ball.png'), height: 50
       
     #nav-bar.navbar-collapse.collapse{ role: 'navigation'}
       %ul.nav.navbar-nav.navbar-right
@@ -46,6 +46,11 @@
               %li 
                 %a{ href: new_team_path(community_id: current_community.id) }
                   + New Team
+
+          -if current_user.admin?(current_community)
+            %li
+              %a{ href: admins_path(community_id: current_community.id) }
+                Admin
 
           %li#account-toggle.dropdown-toggle
             %a.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' }, role: 'button', aria: { expanded: 'true' } }

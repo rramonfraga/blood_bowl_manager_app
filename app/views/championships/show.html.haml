@@ -5,7 +5,7 @@
         = @championship.name
 
     .col-md-4
-      - unless @championship.start?
+      - if !@championship.start? && current_user.admin?(current_community) 
         = button_to "Start #{@championship.name}", { controller: "championships", action: "start", id: @championship.id, community_id: @championship.community.id }  , method: :post, class: "btn btn-lg btn-primary btn-block btn-create-championship"
 
   - if @championship.start?

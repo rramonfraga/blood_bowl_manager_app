@@ -27,7 +27,7 @@ class ChampionshipsController < ApplicationController
     championship = Championship.find_by(id: params[:id])
     team = Team.find_by(id: params[:championship][:team_ids])
     if championship.present? && team.present?
-      championship.join(team)
+      championship.join!(team)
       redirect_to action: 'show', controller: 'communities', community_id: current_community.id
     else
       render status: 404, file: '/public/404.html'

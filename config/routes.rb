@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   scope ':community_id' do
     get '/' => 'communities#show'
 
+    resources :admins, only: [:index]
+
     resources :championships, only: [:show, :new, :create] do
       resources :matches, only: [:show] do
         resources :feats, only: [:new, :create, :destroy]
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
     post 'championships/:championship_id/matches/:id/finish' => 'matches#finish'
 
     resources :teams, only: [:index, :show, :new, :create] do
-      resources :players, only: [:new, :create, :destroy]
+      resources :players, only: [:create, :update, :destroy]
     end
   end
 

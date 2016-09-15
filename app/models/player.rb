@@ -1,4 +1,6 @@
 class Player < ActiveRecord::Base
+  serialize :dice_roll, Array
+
   belongs_to :team
   belongs_to :player, class_name: 'Templates::Player'
 
@@ -16,7 +18,7 @@ class Player < ActiveRecord::Base
 
   def add_points(points)
     self.experience += points
-    level_up if level_up?
+    new_level if new_level?
     save
   end
 
@@ -32,12 +34,13 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def level_up?
+  def new_level?
     level != actual_level
   end
 
-  def level_up
+  def new_level
     self.level = actual_level
+    self.dice_roll = Dice.two_six
     self.level_up = true
   end
 

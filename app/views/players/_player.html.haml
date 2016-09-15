@@ -28,3 +28,12 @@
           ,
       .field.col-sm-2.experience
         = player.experience
+        - if player.level_up?
+          %a#level-up{ href: '/'}
+            = image_tag asset_path('level_up.png')
+
+- if player.level_up?
+  .row.row-main
+    .col-sm-4
+      Dice: 
+      = player.dice_roll

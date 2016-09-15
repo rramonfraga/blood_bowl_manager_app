@@ -10,6 +10,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :experience, default: 0
       t.string  :level, default: "Rookie"
       t.boolean :level_up, default: false
+      t.integer  :dice_roll
       t.integer :mvp
       t.integer :ma
       t.integer :st

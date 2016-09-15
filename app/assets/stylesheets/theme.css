@@ -5,7 +5,7 @@
 
 .btn-blood{
   color: #ecf0f1;
-  background-color: #8c0000;
+  background-color: #65C5E4;
   border-color: #3c0000;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .input-group label:hover{
-  color:#8c0000;
+  color:#65C5E4;
 }
 .input-group label{
   color:#004377;
@@ -37,7 +37,7 @@
 
 
 .championship .match{
-  color: #8c0000;
+  color: #65C5E4;
   font-size: 16px;
   padding: 6px 15px;
 }
@@ -51,10 +51,10 @@
 
 
 a .skill {
-  color: #8c0000;
+  color: #65C5E4;
 }
 .row-header{
-  background-color: #8c0000;
+  background-color: #65C5E4;
   color:#ecf0f1;
   padding: 5px;
 }
@@ -76,7 +76,7 @@ a .skill {
   padding: 9px;
 }
 .row .btn-row{
-  background-color: #8c0000;
+  background-color: #65C5E4;
   color:#ecf0f1;
   padding: 7px 12px;
   margin-right: 0;

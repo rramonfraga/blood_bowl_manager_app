@@ -11,11 +11,15 @@ class User < ActiveRecord::Base
   has_many :teams
 
   def free_teams
-    teams.map { |team| team if !team.joined? }
+    teams.map { |team| team if !team.joined? }.compact
   end
 
   def championships
     teams.flat_map { |team| team.championships }.compact
+  end
+
+  def admin?(community)
+    participations.find { |p| p.community == community }.admin?
   end
 
 end

@@ -18,7 +18,7 @@
               %a{ href: championship_path(id: championship.id, community_id: params[:community_id]) }
                 = championship.name  + " " + championship.kind
       .col-md-4
-        - if current_user.free_teams.blank?
+        - if current_user.free_teams.present?
           .form-group
             = form_for(championship, as: championship, url: "/#{@community.id}/championships/#{championship.id}/join", html: { method: :post, class: 'form-signin' }) do |f|
               .row

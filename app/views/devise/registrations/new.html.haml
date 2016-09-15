@@ -3,7 +3,7 @@
     %h2.form-signin-heading Please sing in
     .field
       = f.label :username, class: 'sr-only'
-      = f.email_field :username, autofocus: true, class: 'form-control', placeholder: "Email address"
+      = f.text_field :username, autofocus: true, class: 'form-control', placeholder: "Username"
     .field
       = f.label :email, class: 'sr-only'
       = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email address"
